@@ -10,8 +10,17 @@ class Home extends Component {
       <div className='container-fluid'>
         <Header/>
         <Menu/>
+        <img 
+          src='/Activity/assets/p1.jpg'  
+          alt='create activity' 
+          onClick={this.createActivity}
+        />
       </div>
     );
+  }
+
+  createActivity = () => {
+    this.props.history.push('/create');
   }
 }
 
