@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.*;
-import com.google.gson.*;
+
 import database.*;
 
 /**
- * Servlet implementation class ActivityServlet
+ * Servlet implementation class UserServlet
  */
-@WebServlet("/api/activity")
-public class ActivityServlet extends HttpServlet {
+@WebServlet("/api/user")
+public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ActivityServlet() {
+    public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +33,7 @@ public class ActivityServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
-		
-		List<Activity> activities;
-		
-		String category = request.getParameter("category");
-		
-		try {
-			ActivityDBAO db = new ActivityDBAO();
-			activities = db.getActivitiesByCategory(category);
-			String json = new Gson().toJson(activities);
-			out.print(json);
-			out.flush();
-		} catch (Exception e) {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	 		response.resetBuffer();
-		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -63,18 +46,14 @@ public class ActivityServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String name = request.getParameter("name");
-		String desc = request.getParameter("desc");
-		String startTime = request.getParameter("startTime");
-		String endTime = request.getParameter("endTime");
-		String category = request.getParameter("category");
-		int count = Integer.parseInt(request.getParameter("count"));
-		String image = request.getParameter("image");
-		int creatorId = Integer.parseInt(request.getParameter("creatorId"));
-		Activity activity = new Activity(0, name, desc, startTime, endTime, category, count, image, 0, 0, creatorId, null);
-		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String gender = request.getParameter("gender");
+		String phone = request.getParameter("phone");
+		User	 user = new User(0, name, username, password, gender, phone);
 		try {
-			ActivityDBAO db = new ActivityDBAO();
-			db.createActivity(activity);
+			UserDBAO db = new UserDBAO();
+			db.createUser(user);
 			out.print(0);
 			out.flush();
 		} catch (Exception e) {
