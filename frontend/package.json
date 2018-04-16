@@ -9,6 +9,7 @@
   "dependencies": {
     "98k": "^0.4.2",
     "axios": "^0.18.0",
+    "classnames": "^2.2.5",
     "querystring": "^0.2.0"
   },
   "devDependencies": {

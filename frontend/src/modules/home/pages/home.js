@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from '98k';
+
+import Header from '../components/header';
+import Menu from '../components/menu';
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        home
+      <div className='container-fluid'>
+        <Header/>
+        <Menu/>
         <img 
-        src="/Activity/assets/p1.jpg"  
-        alt="create activity" 
-        onClick={this.createActivity}
+          src='/Activity/assets/p1.jpg'  
+          alt='create activity' 
+          onClick={this.createActivity}
         />
       </div>
     );
@@ -19,4 +24,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect()(Home);

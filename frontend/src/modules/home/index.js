@@ -14,7 +14,7 @@ export default {
     },
   },
   routes: {
-    '/': { component: Home },
-    '/create':{component: Create}
+    '/'       : { component: Home },
+    '/create' : { component: Create },
   },
 };
