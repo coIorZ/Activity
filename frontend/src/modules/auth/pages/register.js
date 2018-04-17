@@ -100,7 +100,7 @@ class Register extends Component {
     e.preventDefault();
     const { name, username, password, repassword, gender } = this.state;
     if(password != repassword) {
-      return;
+      return alert('password does not match');
     }
     this.props.dispatch({
       type    : 'auth/register',

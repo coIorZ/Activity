@@ -10,3 +10,13 @@ export const register = payload => {
     },
   });
 };
+
+export const login = payload => {
+  payload.password = md5(payload.password);
+  return axios.post('/Activity/api/login', qs.stringify(payload), {
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+    },
+  });
+};
+

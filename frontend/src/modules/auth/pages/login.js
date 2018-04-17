@@ -52,6 +52,7 @@ class Login extends Component {
 
   login = e => {
     e.preventDefault();
+    const { username, password } = this.state;
     this.props.dispatch({
       type    : 'auth/login',
       payload : { username, password },

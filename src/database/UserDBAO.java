@@ -67,7 +67,28 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return user;
+	}
+	
+	public User login(String username, String password) throws SQLException {
+		User user = null;
+		try {
+			String sqlStatement = "select id, name, gender, phone from users where username = ? and password = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, username);
+			prepStmt.setString(2, password);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
 			}
 			prepStmt.close();
 		} catch(SQLException e) {
