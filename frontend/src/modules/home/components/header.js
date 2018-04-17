@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './header.scss';
 
 export default class Logo extends Component {
   state = {
