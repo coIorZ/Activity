@@ -27,8 +27,8 @@ public class ActivityDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			while(rs.next()) {
-				User user = new User(rs.getInt(11), rs.getString(12), "", "", "", "");
-				Activity activity = new Activity(rs.getInt(1), 
+				User user = new User(rs.getString(11), rs.getString(12), "", "", "", "");
+				Activity activity = new Activity(rs.getString(1), 
 						rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7),
 						rs.getString(8), rs.getInt(9), rs.getInt(10), user.getId(), user);
@@ -52,8 +52,8 @@ public class ActivityDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			while(rs.next()) {
-				User user = new User(rs.getInt(11), rs.getString(12), "", "", "", "");
-				activity = new Activity(rs.getInt(1), 
+				User user = new User(rs.getString(11), rs.getString(12), "", "", "", "");
+				activity = new Activity(rs.getString(1), 
 						rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7),
 						rs.getString(8), rs.getInt(9), rs.getInt(10), user.getId(), user);
@@ -78,7 +78,7 @@ public class ActivityDBAO {
 			preparedStatement.setString(5, activity.getCategory());
 			preparedStatement.setInt(6, activity.getCount());
 			preparedStatement.setString(7, activity.getImage());
-			preparedStatement.setInt(8, activity.getCreatorId());
+			preparedStatement.setString(8, activity.getCreatorId());
 			
 			preparedStatement.execute();
 		} catch(SQLException e) {

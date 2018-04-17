@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.*;
+import com.google.gson.Gson;
 
+import java.util.*;
 import database.*;
 
 /**
@@ -50,11 +51,13 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
-		User	 user = new User(0, name, username, password, gender, phone);
+		User	 user = new User(null, name, username, password, gender, phone);
 		try {
 			UserDBAO db = new UserDBAO();
 			db.createUser(user);
-			out.print(0);
+			user = db.getUserByUsername(username);
+			String json = new Gson().toJson(user);
+			out.print(json);
 			out.flush();
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

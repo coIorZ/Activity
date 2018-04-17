@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDBAO {
@@ -34,5 +35,45 @@ public class UserDBAO {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	public User getUserByUsername(String username) throws SQLException {
+		User user = null;
+		try {
+			String sqlStatement = "select id, name, gender, phone from users where username = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, username);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return user;
+	}
+	
+	public User getUserById(String id) throws SQLException {
+		User user = null;
+		try {
+			String sqlStatement = "select id, name, gender, phone from users where id = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return user;
 	}
 }

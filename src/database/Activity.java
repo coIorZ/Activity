@@ -1,7 +1,7 @@
 package database;
 
 public class Activity {
-	private int id;
+	private String id;
 	private String name;
 	private String desc;
 	private String category;
@@ -12,11 +12,11 @@ public class Activity {
 	private int likes;
 	private int participants;
 	private User creator;
-	private int creatorId;
+	private String creatorId;
 	
-	public Activity(int id, String name, String desc, String startTime,
+	public Activity(String id, String name, String desc, String startTime,
 			String endTime, String category, int count, String image,
-			int likes, int participants, int creatorId, User creator) {
+			int likes, int participants, String creatorId, User creator) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,10 +31,10 @@ public class Activity {
 		this.creator = creator;
 		this.creatorId = creatorId;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -97,10 +97,10 @@ public class Activity {
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
-	public int getCreatorId() {
+	public String getCreatorId() {
 		return creatorId;
 	}
-	public void setCreatorId(int creatorId) {
+	public void setCreatorId(String creatorId) {
 		this.creatorId = creatorId;
 	}
 	

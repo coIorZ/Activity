@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Eileentls/Activity/issues"
   },
-  "homepage": "https://github.com/Eileentls/Activity#readme"
+  "homepage": "https://github.com/Eileentls/Activity#readme",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "querystring": "^0.2.0"
+  }
 }
