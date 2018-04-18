@@ -8,9 +8,9 @@ export default {
 
   },
   effects: {
-    *createActivity({ payload }, { call, put }) {
-      const { data } = yield call(services.createActivity, payload);
-      console.log(data);
+    *createActivity({ payload }, { call, put }, { history }) {
+      yield call(services.createActivity, payload);
+      history.push('/');
     },
   },
   routes: {

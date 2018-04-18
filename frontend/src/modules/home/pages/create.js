@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
+import { Redirect } from 'react-router-dom';
+
+import Header from '../../../components/header';
+import Menu from '../../../components/menu';
 
 class Create extends Component {
     state = {
@@ -13,76 +17,86 @@ class Create extends Component {
     }
 
     render() {
+        const { user } = this.props;
         const { image, category, name, count, startTime, endTime, desc } = this.state;
-        
-        return (
-            <form>
-                <h1>
-                    Create Activity
+
+        return user ? (
+            <div className='container-fluid'>
+                <Header />
+                <Menu />
+                <form className='m-5'>
+                    <h1 className='form-group row justify-content-center'>
+                        Create Activity
                 </h1>
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Category</label>
-                    <div className='col-4'>
-                        <select className='form-control' value={category} onChange={this.selectCategory}>
-                            <option value='music'>Music</option>
-                            <option value='lecture'>Lecture</option>
-                            <option value='party'>Party</option>
-                            <option value='movie'>Movie</option>
-                            <option value='exhibition'>Exhibition</option>
-                            <option value='sport'>Sport</option>
-                            <option value='travel'>Travel</option>
-                            <option value='others'>Others</option>
-                        </select>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Category</label>
+                        <div className='col-4'>
+                            <select className='form-control' value={category} onChange={this.selectCategory}>
+                                <option value='music'>Music</option>
+                                <option value='lecture'>Lecture</option>
+                                <option value='party'>Party</option>
+                                <option value='movie'>Movie</option>
+                                <option value='exhibition'>Exhibition</option>
+                                <option value='sport'>Sport</option>
+                                <option value='travel'>Travel</option>
+                                <option value='others'>Others</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Activity Name</label>
-                    <div className='col-4'>
-                        <input className='form-control' value={name} placeholder='Activity Name' onChange={this.inputName}></input>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Activity Name</label>
+                        <div className='col-4'>
+                            <input className='form-control' value={name} placeholder='Activity Name' onChange={this.inputName}></input>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Count</label>
-                    <div className='col-4'>
-                        <input className='form-control' value={count} placeholder='number' onChange={this.inputCount}></input>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Count</label>
+                        <div className='col-4'>
+                            <input className='form-control' value={count} placeholder='number' onChange={this.inputCount}></input>
+                        </div>
                     </div>
-                </div>
 
 
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Start</label>
-                    <div className='col-4'>
-                        <input className='form-control' value={startTime} placeholder='20xx-xx-xx' onChange={this.inputBeginTime}/>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Start</label>
+                        <div className='col-4'>
+                            <input className='form-control' value={startTime} placeholder='20xx-xx-xx' onChange={this.inputBeginTime} />
+                        </div>
                     </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>End</label>
-                    <div className='col-4'>
-                        <input className='form-control' value={endTime} placeholder='20xx-xx-xx' onChange={this.inputEndTime}/>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>End</label>
+                        <div className='col-4'>
+                            <input className='form-control' value={endTime} placeholder='20xx-xx-xx' onChange={this.inputEndTime} />
+                        </div>
                     </div>
-                </div>
 
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Description</label>
-                    <div className='col-4'>
-                        <textarea className='form-control' rows='5' value={desc} placeholder='Details' onChange={this.inputDescription}></textarea>
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Description</label>
+                        <div className='col-4'>
+                            <textarea className='form-control' rows='5' value={desc} placeholder='Details' onChange={this.inputDescription}></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div className='form-group row'>
-                    <label className='col-2 col-form-label'>Image</label>
-                    <div className='col-4'>
-                        <input className='form-control' type='file' accept="image/*"
-                            onChange={this.selectImage}
-                        />
+                    <div className='form-group row justify-content-center'>
+                        <label className='col-2 col-form-label'>Image</label>
+                        <div className='col-4'>
+                            <input className='form-control' type='file' accept="image/*"
+                                onChange={this.selectImage}
+                            />
+                            <div className='mt-3'>
+                                {image && <img className='w-100' src={image} />}
+                            </div>
+                        </div>
                     </div>
-                    <div className='col-4'>
-                        {image && <img className='w-100' src={image}/>}
+
+                    <div className='row justify-content-center'>
+                        <button type='button' className='btn btn-outline-primary' onClick={this.createActivity}>Create</button>
                     </div>
-                </div>
-                <button type='button' className='btn btn-outline-primary' onClick={this.createActivity}>Create</button>
-            </form>
-        );
+                </form>
+            </div>
+        ) : (
+            <Redirect to='/login'/>
+        )
     }
 
     selectCategory = e => {
@@ -90,27 +104,27 @@ class Create extends Component {
             category: e.target.value,
         });
     }
-    inputName = e =>{
+    inputName = e => {
         this.setState({
             name: e.target.value
         })
     }
-    inputCount = e =>{
+    inputCount = e => {
         this.setState({
             count: e.target.value
         })
     }
-    inputBeginTime = e =>{
+    inputBeginTime = e => {
         this.setState({
             startTime: e.target.value
         })
     }
-    inputEndTime = e =>{
+    inputEndTime = e => {
         this.setState({
             endTime: e.target.value
         })
     }
-    inputDescription = e =>{
+    inputDescription = e => {
         this.setState({
             desc: e.target.value
         })
@@ -130,9 +144,11 @@ class Create extends Component {
     createActivity = () => {
         this.props.dispatch({
             type: 'home/createActivity',
-            payload: {...this.state, creatorId: 1},
+            payload: { ...this.state, creatorId: this.props.user.id },
         });
     }
 }
-export default connect()(Create);
+export default connect(state => ({
+    user: state.auth.user
+}))(Create);
 
