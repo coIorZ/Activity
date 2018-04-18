@@ -20,10 +20,13 @@ export default {
     },
   },
   *catch(err, { type }) {
-    if(type == 'auth/register') {
-      alert('fail to register');
-    } else if(type == 'auth/login') {
-      alert('fail to login');
+    const { status } = err.response;
+    switch(type) {
+      case 'auth/register':
+        return alert('fail to register');
+      case 'auth/login':
+        if(status == 400) return alert('wrong username or password');
+        return alert('fail to login');
     }
   },
   reducers: {

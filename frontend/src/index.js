@@ -1,4 +1,5 @@
 import Kar98k from '98k';
+import loading from '98k-loading';
 
 import home from './modules/home';
 import category from './modules/category';
@@ -8,7 +9,6 @@ const app = Kar98k({
   router: 'hash',
 });
 
-app.module(home)
-  .module(category)
-  .module(auth)
+app.use(loading())
+  .module(home, category, auth)
   .start('#app');
