@@ -1,3 +1,3 @@
 import axios from 'axios';
 
-export const fetchActivities = category => axios.get('api/activity', { params: { category } });
+export const fetchActivities = category => axios.get('/Activity/api/activity', { params: { category } });
