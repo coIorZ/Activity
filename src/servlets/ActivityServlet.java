@@ -38,13 +38,22 @@ public class ActivityServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		List<Activity> activities;
+		Activity activity;
 		
 		String category = request.getParameter("category");
+		String id = request.getParameter("id");
 		
 		try {
+			String json = "";
 			ActivityDBAO db = new ActivityDBAO();
-			activities = db.getActivitiesByCategory(category);
-			String json = new Gson().toJson(activities);
+			if(id != null) {
+				activity = db.getActivityById(id);
+				json = new Gson().toJson(activity);
+			} else if(category != null) {
+				activities = db.getActivitiesByCategory(category);
+				json = new Gson().toJson(activities);
+			}
+			
 			out.print(json);
 			out.flush();
 		} catch (Exception e) {

@@ -47,7 +47,7 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
 			}
 			prepStmt.close();
 		} catch(SQLException e) {
