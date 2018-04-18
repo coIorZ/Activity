@@ -3,6 +3,7 @@ package database;
 import java.sql.*;
 import java.util.*;
 
+
 public class ActivityDBAO {
 	Connection con;
 	
@@ -98,6 +99,21 @@ public class ActivityDBAO {
 			throw e;
 		}
 	}
+			
+	public void like(String userId ,String activityId) throws SQLException {
+		try {
+			String sqlStatement = "insert into likes(userId, activityId) values "
+					+ "(?,?)";
+			PreparedStatement preparedStatement = con.prepareStatement(sqlStatement);
+			preparedStatement.setString(1,userId );
+			preparedStatement.setString(2,activityId );
+					
+			preparedStatement.execute();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 	
 	public void unparticipate(String userId, String activityId) throws SQLException {
 		try {
@@ -105,7 +121,21 @@ public class ActivityDBAO {
 			PreparedStatement preparedStatement = con.prepareStatement(sqlStatement);
 			preparedStatement.setString(1, userId);
 			preparedStatement.setString(2, activityId);
+					
+			preparedStatement.execute();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 			
+	public void dislike(String userId ,String activityId) throws SQLException {
+		try {
+			String sqlStatement = "delete from likes where likes.userId = ? and likes.activityId = ?";
+			PreparedStatement preparedStatement = con.prepareStatement(sqlStatement);
+			preparedStatement.setString(1,userId );
+			preparedStatement.setString(2,activityId );
+					
 			preparedStatement.execute();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -113,3 +143,6 @@ public class ActivityDBAO {
 		}
 	}
 }
+	
+
+
