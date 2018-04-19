@@ -31,11 +31,12 @@ class Category extends Component {
         <Header/>
         <Menu/>
         {activities ? (
-          <div>
+          <div className='row'>
             {activities.map(activity => (
               <Card activity={activity}/>
             ))}
           </div>
+          
         ) : (
           <div>loading...</div>
         )}

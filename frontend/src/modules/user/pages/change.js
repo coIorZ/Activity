@@ -47,11 +47,6 @@ class Change extends Component {
                 Confirm
               </button>
             </div>
-            <div className="col col-lg-2 text-center">
-              <button className="btn btn-dark btn-primary" type="reset">
-                Reset
-              </button>
-            </div>
           </div>
         </form>
       </div>

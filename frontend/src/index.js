@@ -6,11 +6,12 @@ import category from './modules/category';
 import auth from './modules/auth';
 import user from'./modules/user';
 import activity from './modules/activity';
+import search from './modules/search';
 
 const app = Kar98k({
   router: 'hash',
 });
 
 app.use(loading())
-  .module(home, category, auth, user, activity)
+  .module(home, category, auth, user, activity,search)
   .start('#app');
