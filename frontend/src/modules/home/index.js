@@ -5,12 +5,27 @@ import Create from'./pages/create';
 export default {
   namespace : 'home',
   state     : {
-
+    activities: null,
   },
   effects: {
-    *createActivity({ payload }, { call }, { history }) {
+    *fetchHome(action, { call, put }) {
+      const { data } = yield call(services.fetchHome);
+      yield put({
+        type: 'home/saveHome',
+        payload: data,
+      });
+    },
+    *createActivity({ payload }, { call, put }, { history }) {
       yield call(services.createActivity, payload);
       history.push('/');
+    },
+  },
+  reducers: {
+    saveHome(state, { payload }) {
+      return {
+        ...state,
+        activities: payload,
+      };
     },
   },
   routes: {
