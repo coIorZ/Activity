@@ -248,4 +248,19 @@ public class UserDBAO {
 		}
 	}
 	
+	public void changeInfos(String id, String name, String phone) throws SQLException {
+		try {
+			String sqlStatement = "Update users set name = ?, phone = ? where id = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, name);
+			prepStmt.setString(2, phone);
+			prepStmt.setString(3, id);
+			prepStmt.execute();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 }
