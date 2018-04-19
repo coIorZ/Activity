@@ -166,6 +166,29 @@ public class ActivityDBAO {
 			throw e;
 		}
 	}
+	
+	public List<Activity> getActivityByTerm(String term) throws SQLException {
+		List<Activity> activities = new ArrayList<>();
+		try {
+			String sqlStatement = "select a.id, a.name, a.desc, a.startTime, a.endTime, a.category, a.count, a.image from activities as a inner join users as u on a.creatorId = u.id where a.name like ? or a.desc like ? or u.name like ? ";
+			PreparedStatement preparedStatement = con.prepareStatement(sqlStatement);
+			preparedStatement.setString(1,"%" + term + "%" );
+			preparedStatement.setString(2,"%" + term + "%" );
+			preparedStatement.setString(3,"%" + term + "%" );
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Activity activity = new Activity(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+				activities.add(activity);
+			}
+			preparedStatement.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return activities;
+	}
 }
 	
 
