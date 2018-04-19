@@ -8,15 +8,13 @@ export default {
     user: null,
   },
   effects: {
-    *register({ payload }, { call, put }, { history }) {
+    *register({ payload }, { call, put }) {
       const { data } = yield call(services.register, payload);
       yield put({ type: 'auth/saveUser', payload: data });
-      history.push('/');
     },
-    *login({ payload }, { call, put }, { history }) {
+    *login({ payload }, { call, put }) {
       const { data } = yield call(services.login, payload);
       yield put({ type: 'auth/saveUser', payload: data });
-      history.push('/');
     },
   },
   *catch(err, { type }) {

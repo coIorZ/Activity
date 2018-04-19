@@ -62,7 +62,7 @@ class Activity extends Component {
   participate = () => {
     const user = this.props.user;
     if (!user) {
-      this.props.history.push('/login');
+      return this.props.history.push('/login', { referrer: this.props.location });
     }
     this.props.dispatch({
       type    : 'activity/joinActivity',

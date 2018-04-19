@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
+import { Redirect } from 'react-router-dom';
 
 import Header from '../../../components/header';
 import Menu from '../../../components/menu';
@@ -11,9 +12,14 @@ class Login extends Component {
   }
 
   render() {
+    const { user } = this.props;
     const { username, password } = this.state;
 
-    return (
+    const referrer = (this.props.location.state && this.props.location.state.referrer) || '/';
+
+    return user ? (
+      <Redirect to={referrer}/>
+    ) : (
       <div className='container-fluid'>
         <Header/>
         <Menu/>
@@ -60,4 +66,4 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+export default connect(state => state.auth)(Login);

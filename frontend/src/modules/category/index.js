@@ -4,25 +4,17 @@ import * as services from './services';
 export default {
   namespace : 'category',
   state     : {
+    activities: null,
   },
   effects: {
     *fetchActivities({ payload }, { call, put }) {
-      const { data: activities } = yield call(services.fetchActivities, payload);
-      yield put({
-        type    : 'category/saveActivities',
-        payload : {
-          category: payload,
-          activities, 
-        },
-      });
+      const { data } = yield call(services.fetchActivities, payload);
+      yield put({ type: 'category/saveActivities', payload: data });
     },
   },
   reducers: {
-    saveActivities(state, { payload: { category, activities } }) {
-      return {
-        ...state,
-        [category]: activities,
-      };
+    saveActivities(state, { payload: activities }) {
+      return { ...state, activities };
     },
   },
   routes: {

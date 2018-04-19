@@ -9,18 +9,15 @@ export default {
   effects: {
     *fetchActivity({ payload }, { call, put }) {
       const { data } = yield call(services.fetchActivity, payload);
-      yield put({
-        type    : 'activity/saveActivity',
-        payload : data,
-      });
+      yield put({ type: 'activity/saveActivity', payload: data });
     },
-    *joinActivity({ payload }, { call }, { history }) {
+    *joinActivity({ payload }, { call, put }) {
       yield call(services.joinActivity, payload);
-      history.push(`/a/${payload.activityId}`);  
+      yield put({ type: 'activity/saveActivity', payload: payload.activityId });
     },
-    *comment({ payload }, { call }, { history }) {
+    *comment({ payload }, { call, put }) {
       yield call(services.comment, payload);
-      history.push(`/a/${payload.activityId}`);  
+      yield put({ type: 'activity/saveActivity', payload: payload.activityId });
     },
   },
   reducers: {

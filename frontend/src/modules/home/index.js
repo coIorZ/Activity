@@ -8,7 +8,7 @@ export default {
 
   },
   effects: {
-    *createActivity({ payload }, { call, put }, { history }) {
+    *createActivity({ payload }, { call }, { history }) {
       yield call(services.createActivity, payload);
       history.push('/');
     },

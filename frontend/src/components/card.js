@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import cx from 'classnames';
 
-import styles from './activity.scss';
+import styles from './card.scss';
 
-class Activity extends Component {
+class Card extends Component {
   render() {
     const { name, image } = this.props.activity;
 
@@ -12,7 +12,7 @@ class Activity extends Component {
       <div className={cx('card', styles['container'])} onClick={this.goto}>
         <img className='card-img-top' src={`${image}`} />
         <div className='card-body'>
-          <h5 className='card-title'>{name}</h5>
+          <p className='card-text'>{name}</p>
         </div>
       </div>
     );
@@ -24,4 +24,4 @@ class Activity extends Component {
   }
 }
 
-export default withRouter(Activity);
+export default withRouter(Card);

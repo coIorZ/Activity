@@ -6,7 +6,7 @@ export const register = payload => {
   payload.password = md5(payload.password);
   return axios.post('/Activity/api/user', qs.stringify(payload), {
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 };
@@ -15,7 +15,7 @@ export const login = payload => {
   payload.password = md5(payload.password);
   return axios.post('/Activity/api/login', qs.stringify(payload), {
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
 
-import Activity from '../components/activity';
+import Card from '../../../components/card';
 import Menu from '../../../components/menu';
 import Header from '../../../components/header';
 
@@ -15,8 +15,7 @@ class Category extends Component {
   }
 
   render() {
-    const category = this.props.match.params.category;
-    const activities = this.props[category];
+    const { activities } = this.props;
 
     return (
       <div className='container-fluid'>
@@ -25,7 +24,7 @@ class Category extends Component {
         {activities ? (
           <div>
             {activities.map(activity => (
-              <Activity activity={activity}/>
+              <Card activity={activity}/>
             ))}
           </div>
         ) : (
