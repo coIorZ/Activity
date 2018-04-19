@@ -3,6 +3,7 @@ import { connect } from "98k";
 import Header from "../../../components/header";
 import Menu from "../../../components/menu";
 import Card from "../../category/components/activity";
+import { Link } from 'react-router-dom';
 
 class Self extends Component {
   state = {};
@@ -27,7 +28,7 @@ class Self extends Component {
               <div className="col-4">
                 <p>User Name:</p>
               </div>
-              <div className="col-8">{user.name}</div>
+              <div className="col-8">{user.username}</div>
             </div>
             <div className="row">
               <div className="col-4">
@@ -43,31 +44,24 @@ class Self extends Component {
             </div>
             <div className="row">
               <div className="col-4">
-                <p>location:</p>
+                <p>phone:</p>
               </div>
-              <div className="col-8">{user.location}</div>
+              <div className="col-8">{user.phone}</div>
             </div>
+            {/* <div className="row">
+            <div className="col-4">
+              <p>location:</p>
+            </div>
+            <div className="col-8">{user.location}</div>
+          </div> */}
           </div>
+
           <div className="col-2 align-self-center">
             <div className="col">
-              <button
-                type="button"
-                id="btn_updateInfo"
-                className="btn btn-primary btn-block"
-                onClick={this.updateActivity}
-              >
-                Update Information
-              </button>
+              <Link className="btn btn-primary btn-block" to='/update'>Update Information</Link>
             </div>
             <div className="col">
-              <button
-                type="button"
-                id="btn_changePassword"
-                className="btn btn-primary btn-block mt-5"
-                onClick={this.changeActivity}
-              >
-                Change Password
-              </button>
+              <Link className="btn btn-primary btn-block mt-5" to='/change'>Change Password</Link>
             </div>
           </div>
         </div>
@@ -88,14 +82,6 @@ class Self extends Component {
       </div>
     );
   }
-  updateActivity = () => { 
-    var newPassword=prompt("Enter new password "); // 弹出input框  
-  }
-  
-  changeActivity = () => {
-    alert('bbb')
-  }
 }
-
 
 export default connect(state => state.user)(Self);
