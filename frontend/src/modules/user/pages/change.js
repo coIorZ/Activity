@@ -19,6 +19,9 @@ class Change extends Component {
         <Header/>
         <Menu/>
         <form className='m-5' onSubmit={this.change}>
+          <div className='form-group row justify-content-center mb-5'>
+            <h4>Change Password</h4>
+          </div>
           <div className='form-group row justify-content-center'>
             <label className='col-2 col-form-label'>Password</label>
             <div className='col-3'>
@@ -38,14 +41,14 @@ class Change extends Component {
             </div>
           </div>
 
-          <div className="row justify-content-center">
-            <div className="col col-lg-2">
-              <button className="btn btn-primary" type="submit">
+          <div className="row justify-content-center mt-5">
+            <div className="col col-lg-2 text-center">
+              <button className="btn btn-dark btn-primary" type="submit">
                 Confirm
               </button>
             </div>
-            <div className="col col-lg-2">
-              <button className="btn btn-primary" type="reset">
+            <div className="col col-lg-2 text-center">
+              <button className="btn btn-dark btn-primary" type="reset">
                 Reset
               </button>
             </div>

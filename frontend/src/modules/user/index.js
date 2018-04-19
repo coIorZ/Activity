@@ -5,7 +5,7 @@ import Change from "./pages/change";
 
 export default {
   namespace: "user",
-  state: {
+  state: { //user:null
     user: {
       username: "xiaoyi",
       name: "xiaoyi",
@@ -13,6 +13,28 @@ export default {
       gender: "female",
       phone: 84275831,
       location: "Singapore",
+      mine: [
+        {
+          id: 1,
+          name: "1",
+          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
+        },
+        {
+          id: 2,
+          name: "2",
+          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
+        },
+        {
+          id: 3,
+          name: "3",
+          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
+        },
+        {
+          id: 4,
+          name: "4",
+          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
+        }
+      ],
       likes: [
         {
           id: 1,
