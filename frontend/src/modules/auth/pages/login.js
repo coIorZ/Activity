@@ -24,20 +24,23 @@ class Login extends Component {
         <Header/>
         <Menu/>
         <form className='m-5' onSubmit={this.login}>
-          <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Username</label>
+        <h4 className='form-group row justify-content-center mb-4'className='form-group row justify-content-center'>
+                        Sign in
+            </h4>
+          <div className='form-group row justify-content-center mb-4'>
+            {/* <label className='col-2 col-form-label'>Username</label> */}
             <div className='col-3'>
-              <input className='form-control' value={username} onChange={this.inputUsername}/>
+              <input className='form-control' placeholder='Username' value={username} onChange={this.inputUsername}/>
             </div>
           </div>
-          <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Password</label>
+          <div className='form-group row justify-content-center mb-4'>
+            {/* <label className='col-2 col-form-label'>Password</label> */}
             <div className='col-3'>
-              <input className='form-control' type='password' value={password} onChange={this.inputPassword}/>
+              <input className='form-control' placeholder='Password' type='password' value={password} onChange={this.inputPassword}/>
             </div>
           </div>
-          <div className='row justify-content-center'>
-            <button className='btn btn-primary' type='submit'>Login</button>
+          <div className='row justify-content-center mb-4'>
+            <button className='btn btn-primary' type='submit'>Sign in</button>
           </div>
         </form>
       </div>

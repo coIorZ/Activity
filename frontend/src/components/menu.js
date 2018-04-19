@@ -13,7 +13,7 @@ export default class Menu extends Component {
           <Link className='nav-item nav-link text-white' to='/c/lecture'>Lecture</Link>
           <Link className='nav-item nav-link text-white' to='/c/party'>Party</Link>
           <Link className='nav-item nav-link text-white' to='/c/movie'>Movie</Link>
-          <Link className='nav-item nav-link text-white' to='/c/wxhibition'>Exhibition</Link>
+          <Link className='nav-item nav-link text-white' to='/c/exhibition'>Exhibition</Link>
           <Link className='nav-item nav-link text-white' to='/c/sport'>Sport</Link>
           <Link className='nav-item nav-link text-white' to='/c/travel'>Travel</Link>
           <Link className='nav-item nav-link text-white' to='/c/others'>Others</Link>
