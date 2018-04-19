@@ -45,6 +45,8 @@ public class HomeServlet extends HttpServlet {
 			String json = "";
 			ActivityDBAO db = new ActivityDBAO();
 			
+			activities = db.getRecentActivity();
+			json = new Gson().toJson(activities);
 			
 			out.print(json);
 			out.flush();
