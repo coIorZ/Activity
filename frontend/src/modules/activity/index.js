@@ -13,11 +13,19 @@ export default {
     },
     *joinActivity({ payload }, { call, put }) {
       yield call(services.joinActivity, payload);
-      yield put({ type: 'activity/saveActivity', payload: payload.activityId });
+      yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
+    },
+    *quitActivity({ payload }, { call, put }) {
+      yield call(services.quitActivity, payload);
+      yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
+    },
+    *deleteActivity({ payload }, { call }, { history }) {
+      yield call(services.deleteActivity, payload);
+      history.push('/');
     },
     *comment({ payload }, { call, put }) {
       yield call(services.comment, payload);
-      yield put({ type: 'activity/saveActivity', payload: payload.activityId });
+      yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
     },
   },
   reducers: {

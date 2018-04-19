@@ -17,6 +17,7 @@ import javax.servlet.http.Part;
 import java.util.*;
 import com.google.gson.*;
 import database.*;
+import javafx.util.converter.ShortStringConverter;
 
 /**
  * Servlet implementation class ActivityServlet
@@ -120,6 +121,22 @@ public class ActivityServlet extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		String id = Util.getData(request.getInputStream());
+		
+		try {
+			ActivityDBAO db = new ActivityDBAO();
+			db.deleteActivity(id);
+			
+			out.print(0);
+			out.flush();
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	 		response.resetBuffer();
+		}
 	}
 
 }

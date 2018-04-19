@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
 
+import withAuth from '../../../lib/withAuth';
 import Header from '../../../components/header';
 import Menu from '../../../components/menu';
 
 class Change extends Component {
   state = {
-    password   : '',
-    newpassword : '',
-    renewpassword :'',
+    password      : '',
+    newpassword   : '',
+    renewpassword : '',
   }
 
   render() {
@@ -41,9 +42,9 @@ class Change extends Component {
             </div>
           </div>
 
-          <div className="row justify-content-center mt-5">
-            <div className="col col-lg-2 text-center">
-              <button className="btn btn-dark btn-primary" type="submit">
+          <div className='row justify-content-center mt-5'>
+            <div className='col col-lg-2 text-center'>
+              <button className='btn btn-dark btn-primary' type='submit'>
                 Confirm
               </button>
             </div>
@@ -75,15 +76,17 @@ class Change extends Component {
 
   change = e => {
     e.preventDefault();
-    const { password, newpassword, renewpassword } = this.state;
+    const { password,  newpassword, renewpassword } = this.state;
     if(newpassword != renewpassword) {
       return alert('New password does not match');
     }
     this.props.dispatch({
-      type    : 'auth/change',
-      payload : { newpassword },
+      type    : 'user/changePassword',
+      payload : { id: this.props.user.id, password, newpassword },
     });
   }
 }
 
-export default connect()(Change);
+export default connect(state => ({
+  user: state.auth.user,
+}))(withAuth(Change));
