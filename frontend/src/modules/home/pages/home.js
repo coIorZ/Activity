@@ -21,7 +21,7 @@ class Home extends Component {
         <Menu />
         {activities ? (
           <div className="row">
-            <div className='col-10 row'>
+            <div className='row'>
               <Project label='Music' activities={activities.filter(a => a.category == 'music')} more='/c/music' />
               <Project label='Lecture' activities={activities.filter(a => a.category == 'lecture')} more='/c/lecture' />
               <Project label='Party' activities={activities.filter(a => a.category == 'party')} more='/c/party' />
@@ -31,14 +31,14 @@ class Home extends Component {
               <Project label='Travel' activities={activities.filter(a => a.category == 'travel')} more='/c/travel' />
               <Project label='Others' activities={activities.filter(a => a.category == 'others')} more='/c/others' />
             </div>
-            <div className="col-2 mt-2">
+            {/* <div className="col-2 mt-2">
               <img
                 className='w-100'
                 src='/Activity/assets/p1.jpg'
                 alt='create activity'
                 onClick={this.createActivity}
               />
-            </div>
+            </div> */}
           </div>
         ) : (
             <div>loading...</div>

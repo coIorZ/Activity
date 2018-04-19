@@ -9,6 +9,7 @@ export default class Menu extends Component {
     return(
       <div className='row bg-dark justify-content-center'>
         <div className='nav text-uppercase'>
+         <Link className='nav-item nav-link text-white' to='/'>Home</Link>
           <Link className='nav-item nav-link text-white' to='/c/music'>Music</Link>
           <Link className='nav-item nav-link text-white' to='/c/lecture'>Lecture</Link>
           <Link className='nav-item nav-link text-white' to='/c/party'>Party</Link>
