@@ -1,89 +1,27 @@
-import Self from "./pages/self";
+import User from "./pages/user";
 import Update from "./pages/update";
 import Change from "./pages/change";
-// import * as services from './services';
+import * as services from './services';
 
 export default {
-  namespace: "user",
-  state: { //user:null
-    user: {
-      username: "xiaoyi",
-      name: "xiaoyi",
-      email: "longxiaoyi1994@gmail.com",
-      gender: "female",
-      phone: 84275831,
-      location: "Singapore",
-      mine: [
-        {
-          id: 1,
-          name: "1",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 2,
-          name: "2",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 3,
-          name: "3",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 4,
-          name: "4",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        }
-      ],
-      likes: [
-        {
-          id: 1,
-          name: "1",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 2,
-          name: "2",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 3,
-          name: "3",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 4,
-          name: "4",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        }
-      ],
-      history: [
-        {
-          id: 1,
-          name: "1",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 2,
-          name: "2",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 3,
-          name: "3",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        },
-        {
-          id: 4,
-          name: "4",
-          image: "/Users/xiaoyi/dev/Activity/WebContent/assets/p1.jpg"
-        }
-      ]
-    }
+  namespace : "user",
+  state     : { 
+    user: null,
+  },
+  effects: {
+    *fetchUser({ payload }, { call, put }) {
+      const { data } = yield call(services.fetchUser, payload);
+      yield put({ type: 'user/saveUser', payload: data });
+    },
+  },
+  reducers: {
+    saveUser(state, { payload: user }) {
+      return { ...state, user };
+    },
   },
   routes: {
-    "/self": { component: Self },
-    "/update": { component: Update },
-    "/change": { component: Change }
-  }
+    "/u/:userId" : { component: User },
+    "/update"    : { component: Update },
+    "/change"    : { component: Change },
+  },
 };

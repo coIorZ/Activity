@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "98k";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -31,10 +31,16 @@ class Header extends Component {
         </form>
         <div className='col-2 text-right h6'>
           {user ? (
-            <Link to='/self'>{user.name}</Link>
+            <Link to={`/u/${user.id}`}>{user.name}</Link>
           ) : (
             <span>
-              <Link to='/register'>Register</Link> /{" "}<Link to='/login'>Sign{" "}in</Link>
+              <Link to={{
+                pathname : '/register',
+                state    : { referrer: this.props.location },
+              }}>Register</Link> / <Link to={{
+                pathname : '/login',
+                state    : { referrer: this.props.location },
+              }}>Sign in</Link>
             </span>
           )}
         </div>
@@ -53,14 +59,10 @@ class Header extends Component {
 
   submit = e => {
     e.preventDefault();
-    //this.props.dispatch({
-    //type    : 'home/fetchSearch',
-    //payload : this.state.term,
-    //});
-    //this.props.history.push('/search');
+    this.props.history.push(`/search/${this.state.term}`);
   };
 }
 
 export default connect(state => ({
   user: state.auth.user,
-}))(Header);
+}))(withRouter(Header));
