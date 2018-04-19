@@ -1,37 +1,47 @@
-import React, { Component } from 'react';
-import { connect } from '98k';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "98k";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
-    term: '',
-  }
+    term: ""
+  };
 
   render() {
     const { user } = this.props;
     const { term } = this.state;
 
     return (
-      <div className='bg-light navbar navbar-expand-lg navbar-light row'>
-        <div className='col-2'>
-          <Link to='/'>
-            <img className='w-100' src='/Activity/assets/7108c7bdb9210263b625c13f8503bf2d.png'/>
+      <div className="bg-light navbar navbar-expand-lg navbar-light row">
+        <div className="col-2">
+          <Link to="/">
+            <img
+              className="w-100"
+              src="/Activity/assets/7108c7bdb9210263b625c13f8503bf2d.png"
+            />
           </Link>
         </div>
-        <form className='col-3 offset-5' onSubmit={this.submit}>
-          <input 
-            className='form-control'
-            Placeholder='search activities here'
+        <form className="col-4 offset-2" onSubmit={this.submit}>
+          <input
+            className="form-control"
+            Placeholder="search activities here"
             value={term}
             onChange={this.change}
           />
         </form>
-        <div className='col-2 text-center'>
+        <div className="col-2">
           {user ? (
-            <Link to='/self'>{user.name}</Link>
+            <Link to="/self">{user.name}</Link>
           ) : (
-            <div><Link to='/register'>register</Link> / <Link to='/login'>login</Link></div>
+            <div className="text-right h6">
+              <Link to="/register">register</Link> /{" "}<Link to="/login">login</Link>
+            </div>
           )}
+        </div>
+        <div className="col-2 text-right">
+          <button type="button" class="btn btn-dark btn-lg">
+            Activity initiation
+          </button>
         </div>
       </div>
     );
@@ -39,9 +49,9 @@ class Header extends Component {
 
   change = e => {
     this.setState({
-      term: e.target.value,
+      term: e.target.value
     });
-  }
+  };
 
   submit = e => {
     e.preventDefault();
@@ -50,9 +60,9 @@ class Header extends Component {
     //payload : this.state.term,
     //});
     //this.props.history.push('/search');
-  }
+  };
 }
 
 export default connect(state => ({
-  user: state.auth.user,
+  user: state.auth.user
 }))(Header);

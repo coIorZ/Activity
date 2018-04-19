@@ -67,6 +67,13 @@ class Self extends Component {
         </div>
 
         <div className="row">
+          <p className="h2">My Activities</p>
+        </div>
+        <div className="row">
+          {user.mine.map(activity => <Card activity={activity} />)}
+        </div>
+
+        <div className="row">
           <p className="h2">Favorite Activities</p>
         </div>
         <div className="row">
@@ -79,6 +86,7 @@ class Self extends Component {
         <div className="row">
           {user.history.map(activity => <Card activity={activity} />)}
         </div>
+
       </div>
     );
   }
