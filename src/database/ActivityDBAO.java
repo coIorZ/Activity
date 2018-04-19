@@ -109,6 +109,19 @@ public class ActivityDBAO {
 		}
 	}
 	
+	public void deleteActivity(String id) throws SQLException {
+		try {
+			String sqlStatement = "delete from activities where id = ?";
+			PreparedStatement preparedStatement = con.prepareStatement(sqlStatement);
+			preparedStatement.setString(1, id);
+			
+			preparedStatement.execute();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	public void participate(String userId, String activityId) throws SQLException {
 		try {
 			String sqlStatement = "insert into participations(userId, activityId) values "

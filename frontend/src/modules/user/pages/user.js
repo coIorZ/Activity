@@ -25,7 +25,7 @@ class Self extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, current } = this.props;
 
     return (
       <div className='container-fluid'>
@@ -68,14 +68,17 @@ class Self extends Component {
                 </div>
               </div>
 
-              <div className='col-2 align-self-center'>
-                <div className='col'>
-                  <Link className='btn btn-primary btn-dark btn-block' to='/update'>Update Information</Link>
+              {current && current.id == user.id && (
+                <div className='col-2 align-self-center'>
+                  <div className='col'>
+                    <Link className='btn btn-primary btn-dark btn-block' to='/updateParticle'>Update Information</Link>
+                  </div>
+                  <div className='col'>
+                    <Link className='btn btn-primary btn-dark btn-block mt-5' to='/changePassword'>Change Password</Link>
+                  </div>
                 </div>
-                <div className='col'>
-                  <Link className='btn btn-primary btn-dark btn-block mt-5' to='/change'>Change Password</Link>
-                </div>
-              </div>
+              )}
+
             </div>
 
             <div className='row justify-content-center'>
@@ -98,6 +101,12 @@ class Self extends Component {
             <div className='row'>
               {user.attend.map(activity => <Card key={activity.id} activity={activity} />)}
             </div>
+
+            {current && (
+              <div className='row justify-content-center'>
+                <button className='btn btn-danger' onClick={this.logout}>LOG OUT</button>
+              </div>
+            )}
           </div>
         ) : (
           <div>loading...</div>
@@ -105,6 +114,12 @@ class Self extends Component {
 
       </div>
     );
+  }
+
+  logout = () => {
+    this.props.dispatch({
+      type: 'user/logout',
+    });
   }
 }
 
