@@ -34,14 +34,12 @@ class Header extends Component {
             <Link to="/self">{user.name}</Link>
           ) : (
             <div className="text-right h6">
-              <Link to="/register">register</Link> /{" "}<Link to="/login">login</Link>
+              <Link to="/register">Register</Link> /{" "}<Link to="/login">Sign{" "}in</Link>
             </div>
           )}
         </div>
         <div className="col-2 text-right">
-          <button type="button" class="btn btn-dark btn-lg">
-            Activity initiation
-          </button>
+          <Link className='btn btn-dark btn-lg' to='/create'>Activity initiation</Link>
         </div>
       </div>
     );

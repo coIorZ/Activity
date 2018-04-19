@@ -11,10 +11,11 @@ class Register extends Component {
     name       : '',
     repassword : '',
     gender     : 'm',
+    phone      : '',
   }
 
   render() {
-    const { name, username, password, repassword, gender } = this.state;
+    const { name, username, password, repassword, gender, phone } = this.state;
 
     return (
       <div className='container-fluid'>
@@ -22,31 +23,40 @@ class Register extends Component {
         <Menu/>
         <form className='m-5' onSubmit={this.register}>
           <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Nickname</label>
+            <h4>Register</h4>
+          </div>
+          <div className='form-group row justify-content-center'>
+            <label className='col-1 col-form-label'>Nickname</label>
             <div className='col-3'>
               <input className='form-control' value={name} onChange={this.inputName}/>
             </div>
           </div>
           <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Username</label>
+            <label className='col-1 col-form-label'>Username</label>
             <div className='col-3'>
               <input className='form-control' value={username} onChange={this.inputUsername}/>
             </div>
           </div>
           <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Password</label>
+            <label className='col-1 col-form-label'>Password</label>
             <div className='col-3'>
               <input className='form-control' type='password' value={password} onChange={this.inputPassword}/>
             </div>
           </div>
           <div className='form-group row justify-content-center'>
-            <label className='col-2 col-form-label'>Password</label>
+            <label className='col-1 col-form-label'>Password</label>
             <div className='col-3'>
               <input className='form-control' type='password' value={repassword} onChange={this.inputRepassword}/>
             </div>
           </div>
+          <div className='form-group row justify-content-center'>
+            <label className='col-1 col-form-label'>Phone</label>
+            <div className='col-3'>
+              <input className='form-control' value={phone} onChange={this.inputPhone}/>
+            </div>
+          </div>
           <div className='form-group row justify-content-center align-items-center'>
-            <label className='col-2 col-form-label'>Gender</label>
+            <label className='col-1 col-form-label'>Gender</label>
             <div className='col-3'>
               <div className='form-check form-check-inline'>
                 <input className='form-check-input' type='radio' name='gender' value='m' checked={gender == 'm'} onChange={this.inputGender}/>
@@ -59,7 +69,7 @@ class Register extends Component {
             </div>
           </div>
           <div className='row justify-content-center'>
-            <button className='btn btn-primary' type='submit'>Register</button>
+            <button className='btn btn-dark btn-lg' type='submit'>Register</button>
           </div>
         </form>
       </div>
@@ -90,6 +100,12 @@ class Register extends Component {
     });
   }
 
+  inputPhone = e => {
+    this.setState({
+      phone: e.target.value,
+    });
+  }
+
   inputGender = e => {
     this.setState({
       gender: e.target.value,
@@ -98,13 +114,13 @@ class Register extends Component {
 
   register = e => {
     e.preventDefault();
-    const { name, username, password, repassword, gender } = this.state;
+    const { name, username, password, repassword, gender, phone } = this.state;
     if(password != repassword) {
       return alert('password does not match');
     }
     this.props.dispatch({
       type    : 'auth/register',
-      payload : { name, username, password, gender },
+      payload : { name, username, password, gender, phone },
     });
   }
 }
