@@ -77,12 +77,16 @@ public class ActivityServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		try {
-			Part part = request.getPart("image");
-			String fileName = "img-" + Long.toString(System.currentTimeMillis()) + ".jpg";
-			File file = new File(getServletContext().getRealPath("/assets/activity"), fileName);
-			InputStream fileContent = part.getInputStream();
-			Files.copy(fileContent, file.toPath());
-
+			String imageUrl = request.getParameter("imageUrl");
+			String image = "/Activity/assets/default.jpg";
+			if(!imageUrl.isEmpty()) {
+				Part part = request.getPart("image");
+				String fileName = "img-" + Long.toString(System.currentTimeMillis()) + ".jpg";
+				File file = new File(getServletContext().getRealPath("/assets"), fileName);
+				InputStream fileContent = part.getInputStream();
+				Files.copy(fileContent, file.toPath());
+				image = "/Activity/assets/" + fileName;
+			}
 			String name = request.getParameter("name");
 			String desc = request.getParameter("desc");
 			String startTime = request.getParameter("startTime");
@@ -91,7 +95,7 @@ public class ActivityServlet extends HttpServlet {
 			int count = Integer.parseInt(request.getParameter("count"));
 			String creatorId = request.getParameter("creatorId");
 			
-			Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, "/Activity/assets/activity/" + fileName, 0, 0, creatorId, null, null, null, null);
+			Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, image, 0, 0, creatorId, null, null, null, null);
 
 			ActivityDBAO db = new ActivityDBAO();
 			db.createActivity(activity);
