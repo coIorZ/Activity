@@ -14,6 +14,15 @@ class Category extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.match.params.category !== nextProps.match.params.category) {
+      this.props.dispatch({
+        type    : 'category/fetchActivities',
+        payload : nextProps.match.params.category,
+      });
+    }
+  }
+
   render() {
     const { activities } = this.props;
 
