@@ -34,7 +34,28 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		User user;
+		
+		String id = request.getParameter("id");
+		
+		try {
+			String json = "";
+			UserDBAO db = new UserDBAO();
+			if(id != null) {
+				user = db.getUsersActivityById(id);
+				json = new Gson().toJson(user);
+			}
+			
+			out.print(json);
+			out.flush();
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	 		response.resetBuffer();
+		}
 	}
 
 	/**
@@ -51,7 +72,11 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
-		User	 user = new User(null, name, username, password, gender, phone);
+		String attend = request.getParameter("attend");
+		String launch = request.getParameter("launch");
+		String like = request.getParameter("like");
+		
+		User	 user = new User(null, name, username, password, gender, phone, null, null, null);
 		try {
 			UserDBAO db = new UserDBAO();
 			db.createUser(user);

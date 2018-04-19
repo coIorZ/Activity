@@ -49,7 +49,7 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, null);
 			}
 			prepStmt.close();
 		} catch(SQLException e) {
@@ -69,9 +69,101 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, null);
 			}
 			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return user;
+	}
+	
+	public List<Activity> getLaunchActivityById(String id) throws SQLException {
+		List<Activity> activities = new ArrayList<>();
+		try {
+			String sqlStatement = "select * from activities where creatorId = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				Activity activity = new Activity(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+				activities.add(activity);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return activities;
+	}
+	
+	public List<Activity> getAttendActivityById(String id) throws SQLException {
+		List<Activity> activities = new ArrayList<>();
+		try {
+			String sqlStatement = "select * from activities as a inner join participations as p on a.id = p.activityId where p.userId = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				Activity activity = new Activity(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+				activities.add(activity);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return activities;
+	}
+	
+	public List<Activity> getLikeActivityById(String id) throws SQLException {
+		List<Activity> activities = new ArrayList<>();
+		try {
+			String sqlStatement = "select * from activities as a inner join likes as l on a.id = l.activityId where l.userId = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				Activity activity = new Activity(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+				activities.add(activity);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return activities;
+	}
+	
+	public User getUsersActivityById(String id) throws SQLException {
+		User user = null;
+		try {
+			List<Activity> attend = getAttendActivityById(id);
+			List<Activity> launch = getLaunchActivityById(id);
+			List<Activity> like = getLikeActivityById(id);
+			
+			String sqlStatement = "select * from users where id = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), attend, launch, like);
+			}
+			prepStmt.close();	
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -90,7 +182,7 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4));
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, null);
 			}
 			prepStmt.close();
 		} catch(SQLException e) {
@@ -110,7 +202,7 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			while(rs.next()) {
-				User user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), null);
+				User user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), null, null, null, null);
 				users.add(user);
 			}
 			prepStmt.close();
