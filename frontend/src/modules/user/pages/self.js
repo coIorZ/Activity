@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "98k";
 import Header from "../../../components/header";
 import Menu from "../../../components/menu";
-import Card from "../../category/components/activity";
+import Card from "../../../components/card";
 import { Link } from 'react-router-dom';
 
 class Self extends Component {
