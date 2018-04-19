@@ -1,10 +1,13 @@
 import Self from "./pages/self";
+import Update from "./pages/update";
+import Change from "./pages/change";
 // import * as services from './services';
 
 export default {
   namespace: "user",
   state: {
     user: {
+      username: "xiaoyi",
       name: "xiaoyi",
       email: "longxiaoyi1994@gmail.com",
       gender: "female",
@@ -57,6 +60,8 @@ export default {
     }
   },
   routes: {
-    "/self": { component: Self }
+    "/self": { component: Self },
+    "/update": { component: Update },
+    "/change": { component: Change }
   }
 };
