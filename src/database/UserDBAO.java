@@ -213,4 +213,39 @@ public class UserDBAO {
 		return users;
 	}
 	
+	public User getIdentificationByPassword(String id,String password) throws SQLException {
+		User user = null;
+		try {
+			String sqlStatement = "select * from users where id = ? and password = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			prepStmt.setString(2, password);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), null, null, null);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return user;
+	}
+	
+	public void changePassword(String id, String newpassword) throws SQLException {
+		try {
+			String sqlStatement = "Update users set password = ? where id = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, newpassword);
+			prepStmt.setString(2, id);
+			prepStmt.execute();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 }
