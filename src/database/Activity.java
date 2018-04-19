@@ -6,11 +6,11 @@ public class Activity {
 	private String id;
 	private String name;
 	private String desc;
+	private String startTime;
+	private String endTime;
 	private String category;
 	private int count;
 	private String image;
-	private String startTime;
-	private String endTime;
 	private int likes;
 	private int participants;
 	private String creatorId;

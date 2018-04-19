@@ -1,13 +1,18 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import java.util.*;
 import com.google.gson.*;
@@ -17,6 +22,7 @@ import database.*;
  * Servlet implementation class ActivityServlet
  */
 @WebServlet("/api/activity")
+@MultipartConfig
 public class ActivityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -70,23 +76,29 @@ public class ActivityServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		String name = request.getParameter("name");
-		String desc = request.getParameter("desc");
-		String startTime = request.getParameter("startTime");
-		String endTime = request.getParameter("endTime");
-		String category = request.getParameter("category");
-		int count = Integer.parseInt(request.getParameter("count"));
-		String image = request.getParameter("image");
-		String creatorId = request.getParameter("creatorId");
-		Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, image, 0, 0, creatorId, null, null, null, null);
-		
 		try {
+			Part part = request.getPart("image");
+			String fileName = "img-" + Long.toString(System.currentTimeMillis()) + ".jpg";
+			File file = new File(getServletContext().getRealPath("/assets/activity"), fileName);
+			InputStream fileContent = part.getInputStream();
+			Files.copy(fileContent, file.toPath());
+
+			String name = request.getParameter("name");
+			String desc = request.getParameter("desc");
+			String startTime = request.getParameter("startTime");
+			String endTime = request.getParameter("endTime");
+			String category = request.getParameter("category");
+			int count = Integer.parseInt(request.getParameter("count"));
+			String creatorId = request.getParameter("creatorId");
+			
+			Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, "/Activity/assets/activity/" + fileName, 0, 0, creatorId, null, null, null, null);
+
 			ActivityDBAO db = new ActivityDBAO();
 			db.createActivity(activity);
 			out.print(0);
 			out.flush();
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	 		response.resetBuffer();
 		}

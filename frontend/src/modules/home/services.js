@@ -1,12 +1,17 @@
 import axios from 'axios';
-import qs from 'querystring';
 
-export const search = term => axios.get('/api/search', { params: { term } });
+export const search = term => axios.get('/Activity/api/search', { params: { term } });
 
-export const fetchHome = () => axios.get('/api/home');
+export const fetchHome = () => axios.get('/Activity/api/home');
 
-export const createActivity = payload => axios.post('/Activity/api/activity', qs.stringify(payload), {
-  headers: {
-    'Content-Type': 'multipart/form-data',
-  },
-});
+export const createActivity = payload => {
+  let data = new FormData();
+  Object.keys(payload).forEach(key => {
+    data.append(key, payload[key]);
+  });
+  return axios.post('/Activity/api/activity', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
