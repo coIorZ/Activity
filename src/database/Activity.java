@@ -17,10 +17,11 @@ public class Activity {
 	private String creatorName;
 	private List<Comment> comments;
 	private String createdAt;
+	private List<User> users;
 	
 	public Activity(String id, String name, String desc, String startTime,
 			String endTime, String category, int count, String image,
-			int likes, int participants, String creatorId, String creatorName, List<Comment> comments, String createdAt) {
+			int likes, int participants, String creatorId, String creatorName, List<Comment> comments, String createdAt, List<User> users) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,6 +37,7 @@ public class Activity {
 		this.creatorName = creatorName;
 		this.comments = comments;
 		this.createdAt = createdAt;
+		this.users = users;
 	}
 
 	public String getId() {
@@ -149,6 +151,15 @@ public class Activity {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
 	
 }
