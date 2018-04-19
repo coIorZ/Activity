@@ -1,5 +1,7 @@
 package database;
 
+import java.util.List;
+
 public class User {
 	private String id;
 	private String name;
@@ -7,8 +9,11 @@ public class User {
 	private String password;
 	private String gender;
 	private String phone;
+	private List<Activity> attend;
+	private List<Activity> launch;
+	private List<Activity> like;
 	
-	public User(String id, String name, String username, String password, String gender, String phone) {
+	public User(String id, String name, String username, String password, String gender, String phone, List<Activity> attend, List<Activity> launch, List<Activity> like) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -16,6 +21,9 @@ public class User {
 		this.password = password;
 		this.gender = gender;
 		this.phone = phone;
+		this.attend = attend;
+		this.launch = launch;
+		this.like = like;
 	}
 
 	public String getId() {
@@ -64,6 +72,30 @@ public class User {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public List<Activity> getAttend() {
+		return attend;
+	}
+
+	public void setAttend(List<Activity> attend) {
+		this.attend = attend;
+	}
+
+	public List<Activity> getLaunch() {
+		return launch;
+	}
+
+	public void setLaunch(List<Activity> launch) {
+		this.launch = launch;
+	}
+
+	public List<Activity> getLike() {
+		return like;
+	}
+
+	public void setLike(List<Activity> like) {
+		this.like = like;
 	}
 	
 	
