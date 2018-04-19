@@ -21,7 +21,7 @@ public class ActivityDBAO {
 	public List<Activity> getActivitiesByCategory(String category) throws SQLException {
 		ArrayList<Activity> activities = new ArrayList<>();
 		try {
-			String sqlStatement = "select a.id, a.name, a.image from activities as a where a.category = ?";
+			String sqlStatement = "select a.id, a.name, a.desc, a.startTime, a.endTime, a.category, a.count, a.image from activities as a where a.category = ?";
 			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
 			prepStmt.setString(1, category);
 			
@@ -29,7 +29,27 @@ public class ActivityDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), null, null, null, null, 0, rs.getString(3), 0, 0, null, null, null);
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+				activities.add(activity);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return activities;
+	}
+	
+	public List<Activity> getRecentActivity() throws SQLException {
+		List<Activity> activities = new ArrayList<>();
+		try {
+			String sqlStatement = "select a.id, a.name, a.desc, a.startTime, a.endTime, a.category, a.count, a.image from activities as a where id in (select t.id from (select id from activities where  category = 'music'  order by createdAt desc  limit 2) as t)or id in (select t.id from (select id from activities where  category = 'lecture' order by createdAt desc  limit 2) as t)or id in (select t.id from (select id from activities where  category = 'party' order by createdAt desc  limit 2) as t) or id in (select t.id from (select id from activities where  category = 'movie' order by createdAt desc  limit 2) as t) or id in (select t.id from (select id from activities where  category = 'exhibition' order by createdAt desc  limit 2) as t) or id in (select t.id from (select id from activities where  category = 'sport' order by createdAt desc  limit 2) as t)or id in (select t.id from (select id from activities where  category = 'travel' order by createdAt desc  limit 2) as t)or id in (select t.id from (select id from activities where  category = 'others' order by createdAt desc limit 2) as t)";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				Activity activity = new Activity(rs.getString(1), 
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -44,7 +64,9 @@ public class ActivityDBAO {
 		Activity activity = null;
 		try {
 			CommentDBAO db = new CommentDBAO();
+			UserDBAO db_1 = new UserDBAO();
 			List<Comment> comments = db.getCommentsByActivityId(id);
+			List<User> users = db_1.getParticipantsByActivityId(id);
 			
 			String sqlStatement = "select a.*, u.name from activities as a inner join users as u on a.creatorId = u.id where a.id = ?";
 			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
@@ -56,7 +78,7 @@ public class ActivityDBAO {
 				activity = new Activity(rs.getString(1), 
 						rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7),
-						rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), comments);
+						rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), comments, rs.getString(13), users);
 			}
 			prepStmt.close();
 		} catch(SQLException e) {

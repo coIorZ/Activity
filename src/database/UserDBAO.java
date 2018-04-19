@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDBAO {
 	Connection con;
@@ -97,4 +99,26 @@ public class UserDBAO {
 		}
 		return user;
 	}
+	
+	public List<User> getParticipantsByActivityId(String id) throws SQLException {
+		List<User> users = new ArrayList<>();
+		try {
+			String sqlStatement = "select u.id, u.name, u.gender from users as u inner join participations as p on u.id = p.userId where activityId = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				User user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), null);
+				users.add(user);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return users;
+	}
+	
 }

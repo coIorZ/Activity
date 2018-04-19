@@ -9,6 +9,7 @@ import Menu from '../../../components/menu';
 class Create extends Component {
     state = {
       image     : '',
+      imageUrl  : '',
       category  : 'music',
       name      : '',
       count     : '',
@@ -19,16 +20,14 @@ class Create extends Component {
 
     render() {
       const { user } = this.props;
-      const { image, category, name, count, startTime, endTime, desc } = this.state;
+      const { imageUrl, category, name, count, startTime, endTime, desc } = this.state;
 
       return user ? (
         <div className='container-fluid'>
           <Header />
           <Menu />
           <form className='m-5'>
-            <h1 className='form-group row justify-content-center'>
-                        Create Activity
-            </h1>
+            <h1 className='form-group row justify-content-center'>Create Activity</h1>
             <div className='form-group row justify-content-center'>
               <label className='col-2 col-form-label'>Category</label>
               <div className='col-4'>
@@ -85,7 +84,7 @@ class Create extends Component {
                   onChange={this.selectImage}
                 />
                 <div className='mt-3'>
-                  {image && <img className='w-100' src={image} />}
+                  {imageUrl && <img className='w-100' src={imageUrl} />}
                 </div>
               </div>
             </div>
@@ -137,15 +136,16 @@ class Create extends Component {
       reader.readAsDataURL(file);
       reader.onload = arg => {
         this.setState({
-          image: arg.target.result,
+          imageUrl: arg.target.result,
         });
+        this.image = file;
       };
     }
 
     createActivity = () => {
       this.props.dispatch({
         type    : 'home/createActivity',
-        payload : { ...this.state, creatorId: this.props.user.id },
+        payload : { ...this.state, creatorId: this.props.user.id, image: this.image },
       });
     }
 }
