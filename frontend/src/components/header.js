@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
-    term: ""
+    term: "",
   };
 
   render() {
@@ -12,33 +12,33 @@ class Header extends Component {
     const { term } = this.state;
 
     return (
-      <div className="bg-light navbar navbar-expand-lg navbar-light row">
-        <div className="col-2">
-          <Link to="/">
+      <div className='bg-light navbar navbar-expand-lg navbar-light row'>
+        <div className='col-2'>
+          <Link to='/'>
             <img
-              className="w-100"
-              src="/Activity/assets/7108c7bdb9210263b625c13f8503bf2d.png"
+              className='w-100'
+              src='/Activity/assets/7108c7bdb9210263b625c13f8503bf2d.png'
             />
           </Link>
         </div>
-        <form className="col-4 offset-2" onSubmit={this.submit}>
+        <form className='col-4 offset-2' onSubmit={this.submit}>
           <input
-            className="form-control"
-            Placeholder="search activities here"
+            className='form-control'
+            Placeholder='search activities here'
             value={term}
             onChange={this.change}
           />
         </form>
-        <div className="col-2">
+        <div className='col-2 text-right h6'>
           {user ? (
-            <Link to="/self">{user.name}</Link>
+            <Link to='/self'>{user.name}</Link>
           ) : (
-            <div className="text-right h6">
-              <Link to="/register">Register</Link> /{" "}<Link to="/login">Sign{" "}in</Link>
-            </div>
+            <span>
+              <Link to='/register'>Register</Link> /{" "}<Link to='/login'>Sign{" "}in</Link>
+            </span>
           )}
         </div>
-        <div className="col-2 text-right">
+        <div className='col-2 text-right'>
           <Link className='btn btn-dark btn-lg' to='/create'>Activity initiation</Link>
         </div>
       </div>
@@ -47,7 +47,7 @@ class Header extends Component {
 
   change = e => {
     this.setState({
-      term: e.target.value
+      term: e.target.value,
     });
   };
 
@@ -62,5 +62,5 @@ class Header extends Component {
 }
 
 export default connect(state => ({
-  user: state.auth.user
+  user: state.auth.user,
 }))(Header);
