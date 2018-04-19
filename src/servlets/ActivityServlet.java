@@ -79,7 +79,7 @@ public class ActivityServlet extends HttpServlet {
 		int count = Integer.parseInt(request.getParameter("count"));
 		String image = request.getParameter("image");
 		String creatorId = request.getParameter("creatorId");
-		Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, image, 0, 0, creatorId, null, null, null);
+		Activity activity = new Activity(null, name, desc, startTime, endTime, category, count, image, 0, 0, creatorId, null, null, null, null);
 		
 		try {
 			ActivityDBAO db = new ActivityDBAO();

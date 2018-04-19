@@ -29,7 +29,7 @@ public class ActivityDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), null, null, null, null, 0, rs.getString(3), 0, 0, null, null, null, null);
+						rs.getString(2), null, null, null, null, 0, rs.getString(3), 0, 0, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -49,7 +49,7 @@ public class ActivityDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), null, rs.getString(4) , rs.getString(5), null, 0, null, 0, 0, null, null, null, null);
+						rs.getString(2), null, rs.getString(4) , rs.getString(5), null, 0, null, 0, 0, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -64,7 +64,9 @@ public class ActivityDBAO {
 		Activity activity = null;
 		try {
 			CommentDBAO db = new CommentDBAO();
+			UserDBAO db_1 = new UserDBAO();
 			List<Comment> comments = db.getCommentsByActivityId(id);
+			List<User> users = db_1.getParticipantsByActivityId(id);
 			
 			String sqlStatement = "select a.*, u.name from activities as a inner join users as u on a.creatorId = u.id where a.id = ?";
 			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
@@ -76,7 +78,7 @@ public class ActivityDBAO {
 				activity = new Activity(rs.getString(1), 
 						rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7),
-						rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), comments, rs.getString(13));
+						rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), comments, rs.getString(13), users);
 			}
 			prepStmt.close();
 		} catch(SQLException e) {
