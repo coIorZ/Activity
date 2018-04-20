@@ -50,12 +50,6 @@ class Self extends Component {
                 </div>
                 <div className='row'>
                   <div className='col-4'>
-                    <p>Email:</p>
-                  </div>
-                  <div className='col-8'>{user.email}</div>
-                </div>
-                <div className='row'>
-                  <div className='col-4'>
                     <p>Gender:</p>
                   </div>
                   <div className='col-8'>{user.gender}</div>

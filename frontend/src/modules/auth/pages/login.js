@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
 import { Redirect } from 'react-router-dom';
-
 import Header from '../../../components/header';
 import Menu from '../../../components/menu';
+
 
 class Login extends Component {
   state = {
@@ -17,34 +17,32 @@ class Login extends Component {
 
     const referrer = (this.props.location.state && this.props.location.state.referrer) || '/';
 
-    return user ? (
-      <Redirect to={referrer}/>
-    ) : (
-      <div className='container-fluid'>
-        <Header/>
-        <Menu/>
-        <form className='m-5' onSubmit={this.login}>
-        <h4 className='form-group row justify-content-center mb-4'className='form-group row justify-content-center'>
-                        Sign in
+    return user ? <Redirect to={referrer} /> : <div className="container-fluid" style={{ backgroundImage: "url(/Activity/assets/timg.jpeg)", height: "100vh" }}>
+        <Header />
+        <Menu />
+        <form className="row justify-content-center text-center" onSubmit={this.login} style={{ marginTop: "120px" }}>
+          <div className='card mt-5 mb-5 col-4'  style={{ backgroundColor:"rgba(255,255,255,.6)" }}>
+            <h4 className="form-group row justify-content-center mb-5 mt-3">
+              Sign in
             </h4>
-          <div className='form-group row justify-content-center mb-4'>
-            {/* <label className='col-2 col-form-label'>Username</label> */}
-            <div className='col-3'>
-              <input className='form-control' placeholder='Username' value={username} onChange={this.inputUsername}/>
+            <div className="form-group row justify-content-center mb-4">
+              <div className="col">
+                <input className="form-control" placeholder="Username" value={username} onChange={this.inputUsername} />
+              </div>
             </div>
-          </div>
-          <div className='form-group row justify-content-center mb-4'>
-            {/* <label className='col-2 col-form-label'>Password</label> */}
-            <div className='col-3'>
-              <input className='form-control' placeholder='Password' type='password' value={password} onChange={this.inputPassword}/>
+            <div className="form-group row justify-content-center mb-4 mt-1">
+              <div className="col">
+                <input className="form-control" placeholder="Password" type="password" value={password} onChange={this.inputPassword} />
+              </div>
             </div>
-          </div>
-          <div className='row justify-content-center mb-4'>
-            <button className='btn btn-primary' type='submit'>Sign in</button>
+            <div className="row justify-content-center mb-4">
+              <button className="btn col btn-primary btn-dark ml-3 mr-3" type="submit">
+                Sign in
+              </button>
+            </div>
           </div>
         </form>
-      </div>
-    );
+      </div>;
   }
 
   inputUsername = e => {
