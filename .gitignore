@@ -3,6 +3,7 @@ dist/
 *.log
 .DS_Store
 build/
-WebContent/static/*.js
+WebContent/static/app.js
+WebContent/static/vendor.js
 WebContent/static/*.map
 WebContent/index.html
