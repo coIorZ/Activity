@@ -21,7 +21,7 @@ public class CommentDBAO {
 	public List<Comment> getCommentsByActivityId(String id) throws SQLException {
 		List<Comment> comments = new ArrayList<>();
 		try {
-			String sqlStatement = "select u.username,c.comment,c.createdAt, c.userId from comments as c inner join users as u on u.id = c.userId where c.activityId = ?";
+			String sqlStatement = "select u.username,c.comment,c.createdAt, c.userId from comments as c inner join users as u on u.id = c.userId where c.activityId = ? order by c.createdAt desc";
 			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
 			prepStmt.setString(1, id);
 			
