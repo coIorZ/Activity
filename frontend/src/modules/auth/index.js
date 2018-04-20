@@ -5,7 +5,7 @@ import Register from './pages/register';
 export default {
   namespace : 'auth',
   state     : {
-    user: null,
+    user:null,
   },
   effects: {
     *register({ payload }, { call, put }, { history }) {
