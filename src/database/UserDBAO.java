@@ -90,7 +90,7 @@ public class UserDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -112,7 +112,7 @@ public class UserDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -134,7 +134,7 @@ public class UserDBAO {
 			
 			while(rs.next()) {
 				Activity activity = new Activity(rs.getString(1), 
-						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null);
+						rs.getString(2), rs.getString(3), rs.getString(4) , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), 0, 0, null, null, null, null, null, null);
 				activities.add(activity);
 			}
 			prepStmt.close();
@@ -181,9 +181,7 @@ public class UserDBAO {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				String id = rs.getString(1);
-				List<Activity> like = getLikeActivityById(id);
-				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, like);
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, null);
 			}
 		
 			prepStmt.close();
@@ -205,6 +203,27 @@ public class UserDBAO {
 			
 			while(rs.next()) {
 				User user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), null, null, null, null);
+				users.add(user);
+			}
+			prepStmt.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return users;
+	}
+	
+	public List<User> getLikeusersByActivityId(String id) throws SQLException {
+		List<User> users = new ArrayList<>();
+		try {
+			String sqlStatement = "select u.id, u.name from users as u inner join likes as l on u.id = l.userId where activityId = ?";
+			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
+			prepStmt.setString(1, id);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			
+			while(rs.next()) {
+				User user = new User(rs.getString(1), rs.getString(2), null, null, null, null, null, null, null);
 				users.add(user);
 			}
 			prepStmt.close();
