@@ -102,8 +102,8 @@ class Activity extends Component {
                     />
                     <button 
                       className={cx({
-                        'btn'         : true,
-                        'btn-success' : true,
+                        'btn'                 : true,
+                        'btn-outline-success' : true,
                       })} 
                       style={{ marginTop: '10px' }}
                       onClick={this.comment}
