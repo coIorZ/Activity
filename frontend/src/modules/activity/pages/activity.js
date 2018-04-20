@@ -14,8 +14,10 @@ class Comment extends Component {
 
     return (
       <div style={{ margin: '15px 0px', borderTop: '1px solid #ccc', padding: '10px 10px 0px' }}>
-        <p style={{ fontSize: '1.3rem' }}><em>{comment.userName}</em></p>
-        <p style={{ color: '#666' }}>{comment.comment}</p>
+        <p style={{ fontSize: '1.3rem' }}>
+          <em style={{ color: '#666', fontSize: 14 }}><Link to={`/u/${comment.userId}`}>{comment.userName}</Link> - <span>{comment.createdAt}</span></em>
+        </p>
+        <p style={{ fontSize: 18 }}>{comment.comment}</p>
       </div>
     );
   }
@@ -56,7 +58,10 @@ class Activity extends Component {
                 <div className={cx('text-center', styles['detail-right-text'])}>
                   <div className='text-uppercase' style={{ fontSize: '2rem' }}>{activity.name}</div>
                   <div>{activity.startTime.split(' ')[0]} - {activity.startTime.split(' ')[0]}</div>
-                  <div>{activity.desc}</div>
+                  <div style={{
+                    maxHeight : 90,
+                    overflow  : 'auto',
+                  }}>{activity.desc}</div>
 
                   {user ? (
                     <div style={{ margin: '10px' }}>
