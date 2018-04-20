@@ -178,12 +178,14 @@ public class UserDBAO {
 			PreparedStatement prepStmt = con.prepareStatement(sqlStatement);
 			prepStmt.setString(1, username);
 			prepStmt.setString(2, password);
-			
 			ResultSet rs = prepStmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, null);
+				String id = rs.getString(1);
+				List<Activity> like = getLikeActivityById(id);
+				user = new User(rs.getString(1), rs.getString(2), null, null, rs.getString(3), rs.getString(4), null, null, like);
 			}
+		
 			prepStmt.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
