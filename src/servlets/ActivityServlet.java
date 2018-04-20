@@ -78,8 +78,9 @@ public class ActivityServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		try {
+			String category = request.getParameter("category");
 			String imageUrl = request.getParameter("imageUrl");
-			String image = "/Activity/assets/default.jpg";
+			String image = "/Activity/assets/" + category + ".jpg";
 			if(!imageUrl.isEmpty()) {
 				Part part = request.getPart("image");
 				String fileName = "img-" + Long.toString(System.currentTimeMillis()) + ".jpg";
@@ -92,7 +93,6 @@ public class ActivityServlet extends HttpServlet {
 			String desc = request.getParameter("desc");
 			String startTime = request.getParameter("startTime");
 			String endTime = request.getParameter("endTime");
-			String category = request.getParameter("category");
 			int count = Integer.parseInt(request.getParameter("count"));
 			String creatorId = request.getParameter("creatorId");
 			
