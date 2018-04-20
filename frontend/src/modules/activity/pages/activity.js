@@ -197,15 +197,17 @@ class Activity extends Component {
         onClick={this.delete}
       >DELETE</button>
     );
+    const { count, participants } = this.props.activity;
+    const disabled = !this.isBefore() || (participants >= count);
     return (
       <button 
         className={cx({
           'btn'               : true,
           'btn-success'       : true,
-          'disabled'          : !this.isBefore(),
+          'disabled'          : disabled,
           [styles['btn-new']] : true,
         })} 
-        disabled={!this.isBefore()}
+        disabled={disabled}
         onClick={this.participate}
       >JOIN</button>
     );
