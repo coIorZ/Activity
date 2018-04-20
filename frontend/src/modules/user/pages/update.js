@@ -27,30 +27,30 @@ class Update extends Component {
         <Header />
         <Menu />
         <form className='row justify-content-center text-center' onSubmit={this.update} style={{ marginTop: "120px" }}>
-        <div className="card mt-5 mb-4 col-4" style={{ backgroundColor:"rgba(255,255,255,.6)" }}>  
-        <div className='form-group row justify-content-center mb-4 mt-3'>
-            <h4>Update Information</h4>
-          </div>
-          <div className='form-group row justify-content-center'>
-            <label className='col-4 col-form-label'>Username</label>
-            <div className='col-8'>
-              <input
-                className='form-control'
-                value={name}
-                onChange={this.inputName}
-              />
+          <div className='card mt-5 mb-4 col-4' style={{ backgroundColor: "rgba(255,255,255,.6)" }}>  
+            <div className='form-group row justify-content-center mb-4 mt-3'>
+              <h4>Update Information</h4>
             </div>
-          </div>
-          <div className='form-group row justify-content-center'>
-            <label className='col-4 col-form-label'>Phone</label>
-            <div className='col-8'>
-              <input
-                className='form-control'
-                value={phone}
-                onChange={this.inputPhone}
-              />
+            <div className='form-group row justify-content-center'>
+              <label className='col-4 col-form-label'>Name</label>
+              <div className='col-8'>
+                <input
+                  className='form-control'
+                  value={name}
+                  onChange={this.inputName}
+                />
+              </div>
             </div>
-          </div>
+            <div className='form-group row justify-content-center'>
+              <label className='col-4 col-form-label'>Phone</label>
+              <div className='col-8'>
+                <input
+                  className='form-control'
+                  value={phone}
+                  onChange={this.inputPhone}
+                />
+              </div>
+            </div>
 
 
             <div className='row justify-content-center mb-4'>

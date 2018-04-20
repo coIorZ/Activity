@@ -5,7 +5,7 @@ import Register from './pages/register';
 export default {
   namespace : 'auth',
   state     : {
-    user:null,
+    user: null,
   },
   effects: {
     *register({ payload }, { call, put }, { history }) {
@@ -31,6 +31,15 @@ export default {
   reducers: {
     saveUser(state, { payload: user }) {
       return { ...state, user };
+    },
+    saveName(state, { payload: name }) {
+      return { 
+        ...state, 
+        user: {
+          ...state.user,
+          name,
+        },
+      };
     },
   },
   routes: {

@@ -1,6 +1,13 @@
 .container {
   width: 100%;
+  margin: 10px 0;
   cursor: pointer;
+
+  &:hover {
+    .card-name {
+      color: orange;
+    }
+  }
 }
 .image {
   height: 250px;
@@ -16,6 +23,6 @@
   }
 }
 
-.card-name:hover {
-  color: orange;
+.card-name {
+  transition: color .5s;
 }

@@ -37,19 +37,17 @@ class Category extends Component {
           </h2>
           <Sep/>
         </div>
-        <div className='container' style={{ marginTop: 50 }}>
-          {activities ? (
-            <div className='row'>
-              {activities.map(activity => (
-                <div className='col-4'>
-                  <Card activity={activity}/>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div>loading...</div>
-          )}
-        </div>
+        {activities ? (
+          <div className='row'>
+            {activities.map(activity => (
+              <div className='col-4'>
+                <Card activity={activity}/>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>loading...</div>
+        )}
       </div>
     );
   }

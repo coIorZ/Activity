@@ -17,8 +17,9 @@ export default {
       yield call(services.changePassword, payload);
       history.push(`/u/${payload.id}`);
     },
-    *updateParticle({ payload }, { call }, { history }) {
+    *updateParticle({ payload }, { call, put }, { history }) {
       yield call(services.updateParticle, payload);
+      yield put({ type: 'auth/saveName', payload: payload.name });
       history.push(`/u/${payload.id}`);
     },
     *logout(action, { put }, { history }) {

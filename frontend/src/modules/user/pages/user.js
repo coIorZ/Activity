@@ -4,6 +4,7 @@ import { connect } from "98k";
 import Header from "../../../components/header";
 import Menu from "../../../components/menu";
 import Card from "../../../components/card";
+import Sep from "../../../components/sep";
 import { Link } from 'react-router-dom';
 
 class Self extends Component {
@@ -44,9 +45,9 @@ class Self extends Component {
               <div className='col-3 align-self-center'>
                 <div className='row'>
                   <div className='col-4'>
-                    <p>User Name:</p>
+                    <p>Name:</p>
                   </div>
-                  <div className='col-8'>{user.username}</div>
+                  <div className='col-8'>{user.name}</div>
                 </div>
                 <div className='row'>
                   <div className='col-4'>
@@ -75,26 +76,55 @@ class Self extends Component {
 
             </div>
 
-            <div className='row justify-content-center'>
-              <p className='h4'>My Activities</p>
-            </div>
-            <div className='row'>
-              {user.launch.map(activity => <Card key={activity.id} activity={activity} />)}
+            <div className='container' style={{ padding: '50px 0' }}>
+              <div>
+                <h2 className='text-center'>
+                  Launched Activities
+                </h2>
+                <Sep/>
+              </div>
+              <div className='row'>
+                {user.launch.map(activity => (
+                  <div className='col-4'>
+                    <Card key={activity.id} activity={activity} />
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className='row justify-content-center'>
-              <p className='h4'>Favorite Activities</p>
-            </div>
-            <div className='row'>
-              {user.like.map(activity => <Card key={activity.id} activity={activity} />)}
+
+            <div className='container' style={{ padding: '50px 0' }}>
+              <div>
+                <h2 className='text-center'>
+                  Participated Activities
+                </h2>
+                <Sep/>
+              </div>
+              <div className='row'>
+                {user.attend.map(activity => (
+                  <div className='col-4'>
+                    <Card key={activity.id} activity={activity} />
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className='row justify-content-center'>
-              <p className='h4'>Participated Activities</p>
+            <div className='container' style={{ padding: '50px 0' }}>
+              <div>
+                <h2 className='text-center'>
+                  Favorite Activities
+                </h2>
+                <Sep/>
+              </div>
+              <div className='row'>
+                {user.like.map(activity => (
+                  <div className='col-4'>
+                    <Card key={activity.id} activity={activity} />
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className='row'>
-              {user.attend.map(activity => <Card key={activity.id} activity={activity} />)}
-            </div>
+
 
             {current && (
               <div className='row justify-content-center'>

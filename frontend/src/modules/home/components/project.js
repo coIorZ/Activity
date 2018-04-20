@@ -25,7 +25,7 @@ class Project extends Component {
             ))}
           </div>
         ) : (
-          <h4 className='text-secondary text-muted'>No activities yet</h4>
+          <h4 className='text-center text-muted'>No activities yet</h4>
         )}
       </div>
     );
