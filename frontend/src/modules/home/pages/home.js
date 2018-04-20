@@ -8,7 +8,7 @@ import Project from "../components/project";
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch({
-      type: "home/fetchHome"
+      type: "home/fetchHome",
     });
   }
 
@@ -16,77 +16,83 @@ class Home extends Component {
     const { activities } = this.props;
 
     return (
-      <div className="container-fluid">
+      <div className='container-fluid'>
         <Header />
         <Menu />
-        <div className="row section section-header">
+        <div className='row section section-header'>
           <div
-            className="parallax parallax-image "
+            className='parallax parallax-image '
             style={{
-              position: 'relative',
-              backgroundImage: "url(/Activity/assets/time.png)",
-              width: "100vw",
-              height: "85vh",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity:0.8
+              position           : 'relative',
+              backgroundImage    : "url(/Activity/assets/time.png)",
+              width              : "100vw",
+              height             : "85vh",
+              backgroundSize     : "cover",
+              backgroundPosition : "center",
+              opacity            : 0.8,
             }}
           >
-            <div className="content text-center" style={{ marginTop: "300px" }}>
-              <p style={{color:'#ffffff',fontSize:'50px'}}>Start!</p>
+            <div className='content text-center' style={{ marginTop: "300px" }}>
+              <p style={{ 
+                color         : '#ffffff', 
+                fontSize      : '50px',
+                fontFamily    : 'cursive',
+                fontWeight    : 500,
+                letterSpacing : '10px',
+              }}><em style={{ color: '#ef443a' }}>i</em>-Together</p>
             </div>
             <span style={{
-              position: 'absolute',
-              bottom: 10,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              color: '#ffffff'
+              position  : 'absolute',
+              bottom    : 10,
+              left      : '50%',
+              transform : 'translateX(-50%)',
+              color     : '#ffffff',
             }} onClick={this.scroll}>
-              <i className="fas fa-chevron-circle-down fa-3x"/>
+              <i className='fas fa-chevron-circle-down fa-3x'/>
             </span>
           </div>
         </div>
         {activities ? (
-          <div className="">
+          <div className=''>
             <Project
-              label="Music"
+              label='Music'
               activities={activities.filter(a => a.category == "music")}
-              to="/c/music"
+              to='/c/music'
             />
             <Project
-              label="Lecture"
+              label='Lecture'
               activities={activities.filter(a => a.category == "lecture")}
-              to="/c/lecture"
+              to='/c/lecture'
             />
             <Project
-              label="Party"
+              label='Party'
               activities={activities.filter(a => a.category == "party")}
-              to="/c/party"
+              to='/c/party'
             />
             <Project
-              label="Movie"
+              label='Movie'
               activities={activities.filter(a => a.category == "movie")}
-              to="/c/movie"
+              to='/c/movie'
             />
             <Project
-              label="Exhibition"
+              label='Exhibition'
               activities={activities.filter(a => a.category == "exhibition")}
-              to="/c/exhibition"
+              to='/c/exhibition'
             />
             <Project
-              label="Sport"
+              label='Sport'
               activities={activities.filter(a => a.category == "sport")}
-              to="/c/sport"
+              to='/c/sport'
             />
             <Project
-              label="Travel"
+              label='Travel'
               activities={activities.filter(a => a.category == "travel")}
-              to="/c/travel"
+              to='/c/travel'
             />
             <Project
-              label="Others"
+              label='Others'
               activities={activities.filter(a => a.category == "others")}
-              to="/c/others"
+              to='/c/others'
             />
           </div>
         ) : (
@@ -98,9 +104,9 @@ class Home extends Component {
 
   scroll = () => {
     window.scrollTo({
-      top:750,
-      behavior: 'smooth',
-    })
+      top      : 770,
+      behavior : 'smooth',
+    });
   }
 
   createActivity = () => {
