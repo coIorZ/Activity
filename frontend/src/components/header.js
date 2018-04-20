@@ -16,7 +16,7 @@ class Header extends Component {
         <div className='col-2'>
           <Link to='/'>
             <img
-              className='w-100'
+              style={{ height: 60 }}
               src='/Activity/assets/7108c7bdb9210263b625c13f8503bf2d.png'
             />
           </Link>
@@ -45,7 +45,7 @@ class Header extends Component {
           )}
         </div>
         <div className='col-2 text-right'>
-          <Link className='btn btn-dark btn-lg' to='/create'>Activity initiation</Link>
+          <Link className='btn btn-dark' to='/create'>Activity initiation</Link>
         </div>
       </div>
     );

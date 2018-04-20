@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-import { connect } from '98k';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
+import Sep from '../../../components/sep';
 import Card from '../../../components/card';
 
-export default class Project extends Component {
-    render() {
-        const { label, activities, more } = this.props;
+class Project extends Component {
+  render() {
+    const { label, activities } = this.props;
 
-        return (
-            <div className="container">
-                <div className='row mt-2'>
-                    <h6 className='col-9' >{label}</h6>
-                    <Link to={more}>More</Link>
-                </div>
-                <div>
-                    {activities.map(activity => (
-                        <Card activity={activity} />
-                    ))}
-                </div>
-            </div>
-        )
-    }
+    return (
+      <div style={{ padding: '50px 0' }}>
+        <div>
+          <h2 className='text-center' style={{ cursor: 'pointer' }} onClick={this.goto}>
+            {label}
+          </h2>
+          <Sep/>
+        </div>
+        {activities.length ? (
+          <div className='row'>
+            {activities.map(activity => (
+              <div className='col-4'>
+                <Card activity={activity} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h4 className='text-secondary text-muted'>No activities yet</h4>
+        )}
+      </div>
+    );
+  }
+
+  goto = () => {
+    this.props.history.push(this.props.to);
+  }
 }
+
+export default withRouter(Project);

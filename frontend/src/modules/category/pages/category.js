@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from '98k';
 
+import Sep from '../../../components/sep';
 import Card from '../../../components/card';
 import Menu from '../../../components/menu';
 import Header from '../../../components/header';
@@ -30,16 +31,25 @@ class Category extends Component {
       <div className='container-fluid'>
         <Header/>
         <Menu/>
-        {activities ? (
-          <div className='row'>
-            {activities.map(activity => (
-              <Card activity={activity}/>
-            ))}
-          </div>
-          
-        ) : (
-          <div>loading...</div>
-        )}
+        <div>
+          <h2 className='text-center' style={{ paddingTop: 50 }}>
+            {this.props.match.params.category}
+          </h2>
+          <Sep/>
+        </div>
+        <div className='container' style={{ marginTop: 50 }}>
+          {activities ? (
+            <div className='row'>
+              {activities.map(activity => (
+                <div className='col-4'>
+                  <Card activity={activity}/>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>loading...</div>
+          )}
+        </div>
       </div>
     );
   }

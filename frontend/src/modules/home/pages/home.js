@@ -20,31 +20,21 @@ class Home extends Component {
         <Header />
         <Menu />
         {activities ? (
-          <div className="row">
-            <div className='row'>
-              <Project label='Music' activities={activities.filter(a => a.category == 'music')} more='/c/music' />
-              <Project label='Lecture' activities={activities.filter(a => a.category == 'lecture')} more='/c/lecture' />
-              <Project label='Party' activities={activities.filter(a => a.category == 'party')} more='/c/party' />
-              <Project label='Movie' activities={activities.filter(a => a.category == 'movie')} more='/c/movie' />
-              <Project label='Exhibition' activities={activities.filter(a => a.category == 'exhibition')} more='/c/exhibition' />
-              <Project label='Sport' activities={activities.filter(a => a.category == 'sport')} more='/c/sport' />
-              <Project label='Travel' activities={activities.filter(a => a.category == 'travel')} more='/c/travel' />
-              <Project label='Others' activities={activities.filter(a => a.category == 'others')} more='/c/others' />
-            </div>
-            {/* <div className="col-2 mt-2">
-              <img
-                className='w-100'
-                src='/Activity/assets/p1.jpg'
-                alt='create activity'
-                onClick={this.createActivity}
-              />
-            </div> */}
+          <div className=''>
+            <Project label='Music' activities={activities.filter(a => a.category == 'music')} to='/c/music' />
+            <Project label='Lecture' activities={activities.filter(a => a.category == 'lecture')} to='/c/lecture' />
+            <Project label='Party' activities={activities.filter(a => a.category == 'party')} to='/c/party' />
+            <Project label='Movie' activities={activities.filter(a => a.category == 'movie')} to='/c/movie' />
+            <Project label='Exhibition' activities={activities.filter(a => a.category == 'exhibition')} to='/c/exhibition' />
+            <Project label='Sport' activities={activities.filter(a => a.category == 'sport')} to='/c/sport' />
+            <Project label='Travel' activities={activities.filter(a => a.category == 'travel')} to='/c/travel' />
+            <Project label='Others' activities={activities.filter(a => a.category == 'others')} to='/c/others' />
           </div>
         ) : (
-            <div>loading...</div>
-          )}
+          <div>loading...</div>
+        )}
       </div>
-    )
+    );
   }
 
   createActivity = () => {

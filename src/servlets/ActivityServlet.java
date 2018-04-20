@@ -80,7 +80,7 @@ public class ActivityServlet extends HttpServlet {
 		try {
 			String category = request.getParameter("category");
 			String imageUrl = request.getParameter("imageUrl");
-			String image = "/Activity/assets/" + category + ".jpg";
+			String image = "/Activity/assets/" + category + ".png";
 			if(!imageUrl.isEmpty()) {
 				Part part = request.getPart("image");
 				String fileName = "img-" + Long.toString(System.currentTimeMillis()) + ".jpg";

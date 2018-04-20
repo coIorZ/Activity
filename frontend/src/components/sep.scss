@@ -1,0 +1,29 @@
+.separator-container {
+  text-align: center;
+  position: relative;
+
+  .separator {
+    color: #c5a47e;
+    margin: 0 auto 1em;
+    width: 11em;
+
+    &:before {
+      float: left;
+      display: block;
+      width: 40%;
+      content: " ";
+      margin-top: 14px;
+      border: 1px solid #c5a47e;
+    }
+    &:after {
+      float: right;
+      display: block;
+      width: 40%;
+      content: " ";
+      margin-top: 14px;
+      border: 1px solid #c5a47e;
+    }
+  }
+}
+
+

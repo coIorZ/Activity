@@ -9,14 +9,14 @@ class Card extends Component {
     const { name, image, startTime, endTime, count } = this.props.activity;
 
     return (
-      <div className={cx('card mb-2 box-shadow col-3 mt-4 ml-4', styles['container'])} onClick={this.goto}>
+      <div className={cx('card box-shadow', styles['container'])} onClick={this.goto}>
         <div className={styles['image']} style={{
-          backgroundImage: `url(${image})`
+          backgroundImage: `url(${image})`,
         }}>
         </div>
         <div className='card-body'>
-          <h4 className='mb-0'>{name}</h4>
-          <div className='mb-1 text-muted'>{startTime.split(' ')[0]} - {endTime.split(' ')[0]}</div>
+          <h4 className={cx('mb-0', styles['card-name'])}>{name}</h4>
+          <div className='mb-1 text-muted'>{startTime.split(' ')[0]} ~ {endTime.split(' ')[0]}</div>
           <div className='mb-1 text-muted'>Participants: {count}</div>
         </div>
 
