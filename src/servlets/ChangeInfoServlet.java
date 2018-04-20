@@ -15,7 +15,7 @@ import database.UserDBAO;
 /**
  * Servlet implementation class ChangeInfoServlet
  */
-@WebServlet("/api/Info")
+@WebServlet("/api/info")
 public class ChangeInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
