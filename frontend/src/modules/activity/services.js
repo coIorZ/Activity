@@ -17,6 +17,18 @@ export const quitActivity = payload => axios.post('/Activity/api/unparticipate',
 
 export const deleteActivity = id => axios.delete('/Activity/api/activity', { data: id });
 
+export const likeActivity = payload => axios.post('/Activity/api/likeActivity', qs.stringify(payload), {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
+
+export const dislikeActivity = payload => axios.post('/Activity/api/dislikeActivity', qs.stringify(payload), {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
+
 export const comment = payload => axios.post('/Activity/api/comment', qs.stringify(payload), {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',

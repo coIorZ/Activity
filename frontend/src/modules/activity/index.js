@@ -23,6 +23,14 @@ export default {
       yield call(services.deleteActivity, payload);
       history.push('/');
     },
+    *likeActivity({ payload }, { call, put }) {
+      yield call(services.likeActivity, payload);
+      yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
+    },
+    *dislikeActivity({ payload }, { call, put }) {
+      yield call(services.dislikeActivity, payload);
+      yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
+    },
     *comment({ payload }, { call, put }) {
       yield call(services.comment, payload);
       yield put({ type: 'activity/fetchActivity', payload: payload.activityId });
