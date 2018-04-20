@@ -23,16 +23,17 @@ class Update extends Component {
     const { name, phone } = this.state;
 
     return (
-      <div className='container-fluid'>
+      <div className='container-fluid' style={{ backgroundImage: "url(/Activity/assets/timg.jpeg)", height: "100vh" }}>
         <Header />
         <Menu />
-        <form className='m-5' onSubmit={this.update}>
-          <div className='form-group row justify-content-center mb-5'>
+        <form className='row justify-content-center text-center' onSubmit={this.update} style={{ marginTop: "120px" }}>
+        <div className="card mt-5 mb-4 col-4" style={{ backgroundColor:"rgba(255,255,255,.6)" }}>  
+        <div className='form-group row justify-content-center mb-4 mt-3'>
             <h4>Update Information</h4>
           </div>
           <div className='form-group row justify-content-center'>
-            <label className='col-1 col-form-label'>Username</label>
-            <div className='col-3'>
+            <label className='col-4 col-form-label'>Username</label>
+            <div className='col-8'>
               <input
                 className='form-control'
                 value={name}
@@ -41,8 +42,8 @@ class Update extends Component {
             </div>
           </div>
           <div className='form-group row justify-content-center'>
-            <label className='col-1 col-form-label'>Phone</label>
-            <div className='col-3'>
+            <label className='col-4 col-form-label'>Phone</label>
+            <div className='col-8'>
               <input
                 className='form-control'
                 value={phone}
@@ -51,12 +52,14 @@ class Update extends Component {
             </div>
           </div>
 
-          <div className='row justify-content-center mt-5'>
-            <div className='col col-lg-2 text-center'>
-              <button className='btn btn-dark btn-primary' type='submit'>
+
+            <div className='row justify-content-center mb-4'>
+              <button className='btn col btn-primary btn-dark mt-2 ml-3 mr-3' type='submit'>
                 Confirm
               </button>
             </div>
+
+          
           </div>
         </form>
       </div>
