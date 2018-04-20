@@ -3,6 +3,8 @@ import { connect } from '98k';
 import { withRouter, Link } from 'react-router-dom';
 import cx from 'classnames';
 
+import styles from './activity.scss';
+
 import Header from '../../../components/header';
 import Menu from '../../../components/menu';
 
@@ -11,9 +13,9 @@ class Comment extends Component {
     const { comment } = this.props;
 
     return (
-      <div>
-        <div>{comment.userName}</div>
-        <div>{comment.comment}</div>
+      <div style={{ margin: '15px 0px', borderTop: '1px solid #ccc', padding: '10px 10px 0px' }}>
+        <p style={{ fontSize: '1.3rem' }}><em>{comment.userName}</em></p>
+        <p style={{ color: '#666' }}>{comment.comment}</p>
       </div>
     );
   }
@@ -44,68 +46,77 @@ class Activity extends Component {
         <Menu/>
 
         {activity ? (
-          <div>
-            <div className='row'>
+          <div className='container'>
+            <div className={cx('row', styles['detail'])}>
 
-              <div className='col-2'>
-                <img className='w-100' src='/Activity/assets/p2.jpg'/>
+              <div className='col-6'>
+                <div className={styles['detail-image']} style={{ backgroundImage: `url(${activity.image})` }}></div>
               </div>
-              <div className='col-8'>
-                <div>{activity.name}</div>
-                <div>{activity.startTime}-{activity.endTime}</div>
-                <div>{activity.desc}</div>
+              <div className={cx('col-6', styles['detail-right'])}>
+                <div className={cx('text-center', styles['detail-right-text'])}>
+                  <div className='text-uppercase' style={{ fontSize: '2rem' }}>{activity.name}</div>
+                  <div>{activity.startTime.split(' ')[0]} - {activity.startTime.split(' ')[0]}</div>
+                  <div>{activity.desc}</div>
 
-                {this.renderJoinBtn()}
-                {user ? (
-                  <span>
-                    <span onClick={this.like}>
-                      <i
-                        className={cx({
-                          'fa-heart' : true,
-                          'fas'      : this.haveLike(),
-                          'far'      : !this.haveLike(),
-                        })} 
-                      /></span>
-                    <span>{activity.likes}</span>
-                  </span>
-                ) : (
-                  <span>
-                    <Link to={{
-                      pathname : '/login',
-                      state    : { referrer: this.props.location },
-                    }}>
-                      <i className='fa-heart far'/>
-                    </Link>
-                    <span>{activity.likes}</span>
-                  </span>)}
+                  {user ? (
+                    <div style={{ margin: '10px' }}>
+                      <span onClick={this.like} >
+                        <i
+                          className={cx({
+                            'fa-heart'       : true,
+                            'fas'            : this.haveLike(),
+                            'far'            : !this.haveLike(),
+                            [styles['like']] : true,
+                          })} 
+                        /></span>
+                      <div>{activity.likes}</div>
+                    </div>
+                  ) : (
+                    <div style={{ margin: '10px' }}>
+                      <Link to={{
+                        pathname : '/login',
+                        state    : { referrer: this.props.location },
+                      }}>
+                        <i className={cx('fa-heart', 'far', styles['like'])} />
+                      </Link>
+                      <div>{activity.likes}</div>
+                    </div>)}
+                </div>
+
+                <div className={cx('text-center', styles['detail-right-btn'])}>
+                  {this.renderJoinBtn()}
+                </div>
               </div>
+
             </div>
+            <div className='row'>
+              <div className='col-12'>
+                {user && this.isCommentValid() && (
+                  <form onSubmit={this.submit} style={{ marginTop: '20px' }}>
+                    <textarea 
+                      className='form-control'
+                      rows='5'
+                      Placeholder='please leave your comment here'
+                      value={term}
+                      onChange={this.change}
+                    />
+                    <button 
+                      className={cx({
+                        'btn'         : true,
+                        'btn-success' : true,
+                      })} 
+                      style={{ marginTop: '10px' }}
+                      onClick={this.comment}
+                    >COMMENT</button>
+                  </form>
+                )}
 
-            {user && this.isCommentValid() && (
-              <form onSubmit={this.submit}>
-                <textarea 
-                  className='form-control'
-                  rows='5'
-                  Placeholder='please leave your comment here'
-                  value={term}
-                  onChange={this.change}
-                />
-                <button 
-                  className={cx({
-                    'btn'         : true,
-                    'btn-success' : true,
-                  })} 
-                  onClick={this.comment}
-                >COMMENT</button>
-              </form>
-            )}
+                <div style={{ margin: '10px 0px' }}>
+                  {activity.comments.map((comment, index) => (
+                    <Comment key={index} comment={comment}/>
+                  ))}
+                </div>
 
-            <div>
-              <div>COMMENTS</div>
-              <div>
-                {activity.comments.map((comment, index) => (
-                  <Comment key={index} comment={comment}/>
-                ))}
               </div>
             </div>
 
@@ -152,7 +163,7 @@ class Activity extends Component {
   renderJoinBtn = () => {
     const { user } = this.props;
     if(!user) return (
-      <Link className='btn btn-success' to={{
+      <Link className={cx('btn', 'btn-outline-success', styles['btn-new'])} to={{
         pathname : '/login',
         state    : { referrer: this.props.location },
       }}>JOIN</Link>
@@ -160,9 +171,10 @@ class Activity extends Component {
     if(this.isParticipant()) return (
       <button 
         className={cx({
-          'btn'        : true,
-          'btn-danger' : true,
-          'disabled'   : !this.isBefore(),
+          'btn'                : true,
+          'btn-outline-danger' : true,
+          'disabled'           : !this.isBefore(),
+          [styles['btn-new']]  : true,
         })} 
         disabled={!this.isBefore()}
         onClick={this.quit}
@@ -171,9 +183,10 @@ class Activity extends Component {
     if(this.isCreator()) return (
       <button 
         className={cx({
-          'btn'        : true,
-          'btn-danger' : true,
-          'disabled'   : !this.isBefore(),
+          'btn'                : true,
+          'btn-outline-danger' : true,
+          'disabled'           : !this.isBefore(),
+          [styles['btn-new']]  : true,
         })}
         disabled={!this.isBefore()}
         onClick={this.delete}
@@ -182,9 +195,10 @@ class Activity extends Component {
     return (
       <button 
         className={cx({
-          'btn'         : true,
-          'btn-success' : true,
-          'disabled'    : !this.isBefore(),
+          'btn'               : true,
+          'btn-success'       : true,
+          'disabled'          : !this.isBefore(),
+          [styles['btn-new']] : true,
         })} 
         disabled={!this.isBefore()}
         onClick={this.participate}

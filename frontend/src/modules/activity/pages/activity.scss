@@ -1,0 +1,39 @@
+.detail {
+  margin-top:2vh;
+}
+
+.detail-right {
+  margin-top:35px;
+  padding-top: 35px;
+}
+
+.detail-right-text {
+  margin-top:50px;
+}
+
+.detail-right-btn {
+  margin-top:40px;
+}
+
+.detail-image {
+  box-shadow: 0 29px 32px -20px rgba(0,0,0,0.5);
+  margin: 9vh auto 30px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.btn-new {
+  padding: 7px 50px;
+  border-radius: 23px
+}
+
+.like {
+  font-size: 27px;
+  color: #dc3545; 
+  cursor: pointer;
+}
