@@ -1,0 +1,14 @@
+.item {
+    color:#6c757d;
+    transition: color .5s;
+    font-weight: 450;
+    margin: 0 15px;
+}
+
+.item:hover {
+    color: white;
+}
+.background{ 
+    background:black; 
+    height: 40px;
+}
