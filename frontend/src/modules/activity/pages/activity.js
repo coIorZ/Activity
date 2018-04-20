@@ -56,15 +56,28 @@ class Activity extends Component {
                 <div>{activity.desc}</div>
 
                 {this.renderJoinBtn()}
-              </div>
-            </div>
-
-            <div>
-              <div>COMMENTS</div>
-              <div>
-                {activity.comments.map((comment, index) => (
-                  <Comment key={index} comment={comment}/>
-                ))}
+                {user ? (
+                  <span>
+                    <span onClick={this.like}>
+                      <i
+                        className={cx({
+                          'fa-heart' : true,
+                          'fas'      : this.haveLike(),
+                          'far'      : !this.haveLike(),
+                        })} 
+                      /></span>
+                    <span>{activity.likes}</span>
+                  </span>
+                ) : (
+                  <span>
+                    <Link to={{
+                      pathname : '/login',
+                      state    : { referrer: this.props.location },
+                    }}>
+                      <i className='fa-heart far'/>
+                    </Link>
+                    <span>{activity.likes}</span>
+                  </span>)}
               </div>
             </div>
 
@@ -87,12 +100,43 @@ class Activity extends Component {
               </form>
             )}
 
+            <div>
+              <div>COMMENTS</div>
+              <div>
+                {activity.comments.map((comment, index) => (
+                  <Comment key={index} comment={comment}/>
+                ))}
+              </div>
+            </div>
+
+
           </div>
         ) : (
           <div>loading...</div>
         )}
       </div>
     );
+  }
+
+  like = () => {
+    const { user: { id: userId }, activity: { id: activityId } } = this.props;
+    if (this.haveLike())  {
+      this.props.dispatch({
+        type    : 'activity/dislikeActivity',
+        payload : { userId, activityId },
+      });
+    } else {
+      this.props.dispatch({
+        type    : 'activity/likeActivity',
+        payload : { userId, activityId },
+      });
+    }
+  }
+
+
+  haveLike = () => {
+    const { user:{ id: userId }, activity: { likeusers } } = this.props;
+    return likeusers.map(u => u.id).includes(userId);
   }
 
   change = e => {
@@ -162,7 +206,6 @@ class Activity extends Component {
     const { activity: { startTime } } = this.props;
     const today = new Date().getTime();
     const start = new Date(startTime).getTime();
-
     return today < start;
   }
 
