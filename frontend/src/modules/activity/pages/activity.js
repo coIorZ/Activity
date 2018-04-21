@@ -94,6 +94,20 @@ class Activity extends Component {
               </div>
 
             </div>
+
+            {(user && (this.isParticipant() || this.isCreator())) && (
+              <div className='row'>
+                <div className='col-12'>
+                  {activity.users.map(u => (
+                    <div 
+                      style={{ borderRadius: 15, marginRight: 5 }}
+                      className='btn btn-outline-info btn-sm' 
+                      onClick={this.gotoUser.bind(this, u.id)}>{u.name}</div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className='row'>
               <div className='col-12'>
                 {user && this.isCommentValid() && (
@@ -166,12 +180,12 @@ class Activity extends Component {
   }
 
   renderJoinBtn = () => {
-    const { user } = this.props;
+    const { user, activity: { users } } = this.props;
     if(!user) return (
       <Link className={cx('btn', 'btn-outline-success', styles['btn-new'])} to={{
         pathname : '/login',
         state    : { referrer: this.props.location },
-      }}>JOIN</Link>
+      }}>JOIN({users.length})</Link>
     );
     if(this.isParticipant()) return (
       <button 
@@ -209,7 +223,7 @@ class Activity extends Component {
         })} 
         disabled={disabled}
         onClick={this.participate}
-      >JOIN</button>
+      >JOIN({users.length})</button>
     );
   }
 
@@ -273,6 +287,10 @@ class Activity extends Component {
       },
     });
     this.setState({ term: '' });
+  }
+
+  gotoUser = id => {
+    this.props.history.push(`/u/${id}`);
   }
 }
 
